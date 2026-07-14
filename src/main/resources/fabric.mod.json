@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "cataclysms",
+	"version": "${version}",
+	"name": "Cataclysm: Starscorched",
+	"description": "",
+	"authors": [
+		"ProbablyaDoor"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/ProbablyaDoor/Cataclysm-Starscorched"
+	},
+	"license": "MIT",
+	"icon": "assets/cataclysms/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.probablyadoor.cataclysms.CataclysmStarscorched"
+		],
+		"fabric-datagen": [
+			"com.probablyadoor.cataclysms.CataclysmStarscorchedDataGenerator"
+		],
+		"client": [
+			"com.probablyadoor.cataclysms.CataclysmStarscorchedClient"
+		]
+	},
+	"mixins": [
+		"cataclysms.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
