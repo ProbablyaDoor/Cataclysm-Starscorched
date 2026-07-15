@@ -1,5 +1,6 @@
 package com.probablyadoor.cataclysms.item.custom;
 
+import com.probablyadoor.cataclysms.block.ModBlocks;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -9,11 +10,13 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
@@ -45,10 +48,11 @@ public class ChaosToolItem extends Item {
                 0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
         );
         if (!world.isClient) {
-            EnderPearlEntity enderPearlEntity = new EnderPearlEntity(world, user);
-            enderPearlEntity.setItem(itemStack);
-            enderPearlEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-            world.spawnEntity(enderPearlEntity);
+            FireballEntity fireballEntity = new FireballEntity(world, user, user.getPos(), 5);
+            fireballEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            fireballEntity.setPos(user.getX(), user.getY()+1, user.getZ());
+            fireballEntity.setItem(new ItemStack(Items.ENDER_PEARL));
+            world.spawnEntity(fireballEntity);
         }
         return TypedActionResult.success(itemStack, world.isClient());
     }
