@@ -1,19 +1,31 @@
 package com.probablyadoor.cataclysms.item.custom;
 
+import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.decoration.ArmorStandEntity;
+import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
+import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.entity.projectile.thrown.SnowballEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldEvents;
+
+import java.util.function.Predicate;
 
 public class ChaosToolItem extends Item {
 
@@ -33,9 +45,13 @@ public class ChaosToolItem extends Item {
                 0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
         );
         if (!world.isClient) {
-            LightningEntity lightningEntity = new LightningEntity(world, user, user.pos())
-            world.spawnEntity(LightningEntity);
+            EnderPearlEntity enderPearlEntity = new EnderPearlEntity(world, user);
+            enderPearlEntity.setItem(itemStack);
+            enderPearlEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            world.spawnEntity(enderPearlEntity);
         }
         return TypedActionResult.success(itemStack, world.isClient());
     }
+
+
 }
