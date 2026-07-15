@@ -5,15 +5,26 @@ import com.probablyadoor.cataclysms.item.custom.ChaosToolItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.Registries;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
 
 public class ModItems {
     public static final Item STARMETAL_SCRAP = registerItem("starmetal_scrap", new Item(new Item.Settings()));
     public static final Item STARMETAL_INGOT = registerItem("starmetal_ingot", new Item(new Item.Settings()));
 
-    public static final Item MANGOSTEEN = registerItem("mangosteen", new Item(new Item.Settings().food(ModFoodComponents.MANGOSTEEN)));
+    public static final Item MANGOSTEEN = registerItem("mangosteen", new Item(new Item.Settings().food(ModFoodComponents.MANGOSTEEN)){
+        @Override
+        public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
+            tooltip.add(Text.translatable("tooltip.cataclysms.mangosteen.tooltip"));
+            super.appendTooltip(stack, context, tooltip, type);
+        }
+    });
 
 
     public static final Item CATACLYSM_ITEMS = registerItem("cataclysm_items", new Item(new Item.Settings()));

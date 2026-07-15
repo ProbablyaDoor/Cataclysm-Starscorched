@@ -1,5 +1,6 @@
 package com.probablyadoor.cataclysms.block.custom;
 
+import com.probablyadoor.cataclysms.util.ModTags;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -38,7 +39,7 @@ public class StarSlateBlock extends Block {
         super.onBreak(world, pos, state, player);
 
         if (!world.isClient()) {
-            if (!player.getMainHandStack().isOf(Items.DIAMOND_PICKAXE))
+            if (!player.getMainHandStack().isIn(ModTags.Items.VALID_PICKAXES))
                 player.damage(world.getDamageSources().magic(), 5.0F);
         }
         return state;
