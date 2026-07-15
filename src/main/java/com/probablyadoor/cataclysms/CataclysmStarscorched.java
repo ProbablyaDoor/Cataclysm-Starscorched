@@ -1,5 +1,7 @@
 package com.probablyadoor.cataclysms;
 
+import com.probablyadoor.cataclysms.block.ModBlocks;
+import com.probablyadoor.cataclysms.item.ModItemGroups;
 import com.probablyadoor.cataclysms.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -14,7 +16,10 @@ public class CataclysmStarscorched implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModItemGroups.registerItemGroups();
+
 		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
 	}
 
 	public static Identifier id(String path) {

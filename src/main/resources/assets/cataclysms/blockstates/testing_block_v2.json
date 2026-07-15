@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "cataclysms:block/testing_block_v2"
+    }
+  }
+}
