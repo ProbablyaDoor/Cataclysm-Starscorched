@@ -1,12 +1,15 @@
 {
-  "item.cataclysms.starmetal_scrap": "Starmetal Scrap",
+  "item.cataclysms.starmetal_scrap": "Starscorched Scrap",
   "item.cataclysms.starmetal_ingot": "Starmetal Ingot",
-  "item.cataclysms.chaos_tool": "Chaos Tool",
+
+
+  "block.cataclysms.starscorched_slate": "Starscorched Slate",
 
 
   "block.cataclysms.testing_block": "Testing Block",
   "block.cataclysms.testing_block_v2": "Reinforced Testing Block",
   "block.cataclysms.testing_block_v3": "Unbreakable Testing Block",
+  "item.cataclysms.chaos_tool": "Chaos Tool",
 
   "itemgroup.cataclysms.cataclysm_items": "Cataclysm Items",
   "itemgroup.cataclysms.cataclysm_weapons": "Cataclysm Weapons",

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "cataclysms:block/starscorched_slate_top",
+    "side": "cataclysms:block/starscorched_slate"
+  }
+}

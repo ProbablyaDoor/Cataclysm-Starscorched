@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.2,
+  "ingredient": {
+    "item": "cataclysms:starmetal_scrap"
+  },
+  "result": {
+    "id": "cataclysms:starmetal_ingot"
+  }
+}
