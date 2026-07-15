@@ -18,6 +18,7 @@ public class ModItemGroups {
                     .entries((displayContext, entries) -> {
                         entries.add(ModItems.STARMETAL_SCRAP);
                         entries.add(ModItems.STARMETAL_INGOT);
+                        entries.add(ModItems.MANGOSTEEN);
                     }).build());
 
     public static final ItemGroup CATACLYSM_BLOCKS = Registry.register(Registries.ITEM_GROUP,

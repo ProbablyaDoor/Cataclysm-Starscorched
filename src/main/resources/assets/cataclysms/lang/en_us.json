@@ -1,18 +1,27 @@
 {
-  "item.cataclysms.starmetal_scrap": "Starscorched Scrap",
-  "item.cataclysms.starmetal_ingot": "Starmetal Ingot",
+  "item.cataclysms.starmetal_scrap": "§6Starscorched Scrap",
+  "item.cataclysms.starmetal_ingot": "§6Starmetal Ingot",
+  "item.cataclysms.mangosteen": "§eMangosteen",
 
 
-  "block.cataclysms.starscorched_slate": "Starscorched Slate",
+  "block.cataclysms.starscorched_slate": "§6Starscorched Slate",
 
 
-  "block.cataclysms.testing_block": "Testing Block",
-  "block.cataclysms.testing_block_v2": "Reinforced Testing Block",
-  "block.cataclysms.testing_block_v3": "Unbreakable Testing Block",
-  "item.cataclysms.chaos_tool": "Chaos Tool",
+  "block.cataclysms.testing_block": "§aTesting Block",
+  "block.cataclysms.testing_block_v2": "§bReinforced Testing Block",
+  "block.cataclysms.testing_block_v3": "§4Unbreakable Testing Block",
+  "item.cataclysms.chaos_tool": "§dChaos Tool",
 
-  "itemgroup.cataclysms.cataclysm_items": "Cataclysm Items",
-  "itemgroup.cataclysms.cataclysm_weapons": "Cataclysm Weapons",
-  "itemgroup.cataclysms.cataclysm_blocks": "Cataclysm Blocks",
-  "itemgroup.cataclysms.cataclysm_admin": "Debug Items"
+  "itemgroup.cataclysms.cataclysm_items": "§dCataclysm Items",
+  "itemgroup.cataclysms.cataclysm_weapons": "§dCataclysm Weapons",
+  "itemgroup.cataclysms.cataclysm_blocks": "§dCataclysm Blocks",
+  "itemgroup.cataclysms.cataclysm_admin": "§eDebug Items",
+
+  "tooltip.cataclysms.starscorched_slate.tooltip": "§6A strange stone made from something§k eldritch§r",
+
+
+  "tooltip.cataclysms.chaos_tool.shift_down":"§4This item has the capability to summon highly explosive fireballs",
+  "tooltip.cataclysms.chaos_tool.shift_down2":"§4More functionality will be planned for later",
+  "tooltip.cataclysms.chaos_tool.shift_down3":"§4USE AT YOUR OWN RISK",
+  "tooltip.cataclysms.chaos_tool": "Press §eSHIFT§r for more info"
 }
