@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 500,
+  "experience": 10.5,
+  "group": "starmetal_ingot",
+  "ingredient": {
+    "item": "cataclysms:starscorched_slate"
+  },
+  "result": {
+    "id": "cataclysms:starmetal_ingot"
+  }
+}
