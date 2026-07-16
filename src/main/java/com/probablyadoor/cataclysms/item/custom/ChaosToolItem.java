@@ -1,8 +1,11 @@
 package com.probablyadoor.cataclysms.item.custom;
 
 import com.probablyadoor.cataclysms.block.ModBlocks;
+import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import net.fabricmc.fabric.api.entity.event.v1.ServerPlayerEvents;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.LoreComponent;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LightningEntity;
@@ -52,6 +55,7 @@ public class ChaosToolItem extends Item {
                 SoundCategory.NEUTRAL,
                 0.5F,
                 0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
+
         );
         if (!world.isClient) {
             FireballEntity fireballEntity = new FireballEntity(world, user, user.getPos(), 5);
@@ -59,7 +63,9 @@ public class ChaosToolItem extends Item {
             fireballEntity.setPos(user.getX(), user.getY()+1, user.getZ());
             fireballEntity.setItem(new ItemStack(Items.ENDER_PEARL));
             world.spawnEntity(fireballEntity);
-
+            int initialUses = itemStack.getOrDefault(ModDataComponentTypes.TOTAL_USES, 0);
+            int currentUses = initialUses + 1;
+            itemStack.set(ModDataComponentTypes.TOTAL_USES, currentUses);
         }
         return TypedActionResult.success(itemStack, world.isClient());
     }
@@ -72,6 +78,10 @@ public class ChaosToolItem extends Item {
         } else {
             tooltip.add(Text.translatable("tooltip.cataclysms.chaos_tool"));
         }
+
+        int uses = stack.getOrDefault(ModDataComponentTypes.TOTAL_USES, 0);
+            tooltip.add(Text.literal("Projectiles Fired: " + uses));
+
         super.appendTooltip(stack, context, tooltip, options);
     }
 

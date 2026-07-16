@@ -13,12 +13,12 @@ repositories {
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
 	maven { url = "https://jitpack.io" }
+	mavenCentral()
 	maven {
-		name "KosmX's maven"
-		url 'https://maven.kosmx.dev/'
+		name = "RedlanceMinecraft"
+		url = "https://repo.redlance.org/public"
 	}
 }
-
 fabricApi {
 	configureDataGeneration {
 		client = true
@@ -33,7 +33,9 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
-	include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:${project.player_anim_version}")
+
+	// PAL. Uses custom player animations
+	modImplementation "com.zigythebird.playeranim:PlayerAnimationLibFabric:$pal_version"
 }
 
 processResources {
