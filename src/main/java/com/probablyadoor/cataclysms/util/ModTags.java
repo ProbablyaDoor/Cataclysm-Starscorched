@@ -9,6 +9,25 @@ import net.minecraft.util.Identifier;
 
 public class ModTags {
     public static class Blocks {
+        public static final TagKey<Block> NEEDS_DAYBREAKER_TOOL = createTag("needs_daybreaker_tool");
+        public static final TagKey<Block> INCORRECT_FOR_DAYBREAKER_TOOL = createTag("incorrect_for_daybreaker_tool");
+
+        public static final TagKey<Block> NEEDS_FROSTFALL_TOOL = createTag("needs_frostfall_tool");
+        public static final TagKey<Block> INCORRECT_FOR_FROSTFALL_TOOL = createTag("incorrect_for_frostfall_tool");
+
+        public static final TagKey<Block> NEEDS_MAGICBANE_TOOL = createTag("needs_magicbane_tool");
+        public static final TagKey<Block> INCORRECT_FOR_MAGICBANE_TOOL = createTag("incorrect_for_magicbane_tool");
+
+        public static final TagKey<Block> NEEDS_AQUAFLORA_TOOL = createTag("needs_aquaflora_tool");
+        public static final TagKey<Block> INCORRECT_FOR_AQUAFLORA_TOOL = createTag("incorrect_for_aquaflora_tool");
+
+        public static final TagKey<Block> NEEDS_SUPERNOVA_TOOL = createTag("needs_supernova_tool");
+        public static final TagKey<Block> INCORRECT_FOR_SUPERNOVA_TOOL = createTag("incorrect_for_supernova_tool");
+
+        public static final TagKey<Block> NEEDS_ADMIN_TOOL = createTag("needs_admin_tool");
+        public static final TagKey<Block> INCORRECT_FOR_ADMIN_TOOL = createTag("incorrect_for_admin_tool");
+
+
 
         private static TagKey<Block> createTag(String name) {
             return TagKey.of(RegistryKeys.BLOCK, Identifier.of(CataclysmStarscorched.MOD_ID, name));

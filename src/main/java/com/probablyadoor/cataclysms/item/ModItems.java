@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.SwordItem;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.Registries;
@@ -33,6 +34,13 @@ public class ModItems {
     public static final Item CATACLYSM_DEBUG = registerItem("cataclysm_debug", new Item(new Item.Settings()));
 
     public static final Item CHAOS_TOOL = registerItem("chaos_tool", new ChaosToolItem(new Item.Settings().maxCount(1)));
+
+    public static final Item DAYBREAKER = registerItem("daybreaker", new SwordItem(ModToolMaterials.DAYBREAKER, new Item.Settings()
+            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.DAYBREAKER, 9, -2.4f))));
+    public static final Item FROSTFALL = registerItem("frostfall", new SwordItem(ModToolMaterials.FROSTFALL, new Item.Settings()
+            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.FROSTFALL, 9, -2.4f))));
+    public static final Item MAGICBANE = registerItem("magicbane", new SwordItem(ModToolMaterials.MAGICBANE, new Item.Settings()
+            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.MAGICBANE, 5, -2.4f))));
 
 
 

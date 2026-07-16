@@ -40,5 +40,10 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.STARMETAL_INGOT, Models.GENERATED);
         itemModelGenerator.register(ModItems.STARMETAL_SCRAP, Models.GENERATED);
 
+        itemModelGenerator.register(ModItems.DAYBREAKER, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.FROSTFALL, Models.HANDHELD);
+        itemModelGenerator.register(ModItems.MAGICBANE, Models.HANDHELD);
+
+
     }
 }

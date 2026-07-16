@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T18:06:31.3299962	Cataclysm: Starscorched/Model Definitions
+// 1.21.1	2026-07-16T15:44:34.3256112	Cataclysm: Starscorched/Model Definitions
 2d960e191ddb1a4989bba168890c25fed5c666c6 assets\cataclysms\blockstates\testing_block_v2.json
 574704f401a3831f202dd1fbeb206741ba5731f0 assets\cataclysms\models\block\testing_block_v2.json
 87c61fcb736f7e346a962ff824d68b678c5dd2d7 assets\cataclysms\blockstates\starscorched_slate.json
@@ -7,6 +7,7 @@
 74222d72d5af003110e0ce150fefcb0cf9ad75bc assets\cataclysms\models\item\testing_block.json
 651d2f99810a09ec2bf597a9f56d5b271e5fd2a9 assets\cataclysms\models\item\chaos_tool.json
 12ec66cb51212c9d8c29cc740e2a6045626311f3 assets\cataclysms\models\block\testing_block_v3.json
+d535aca2e8be60c96296cd6b4f6d807622799828 assets\cataclysms\models\item\daybreaker.json
 458c69e56b41220e39a16b07a81953ed56f60f9e assets\cataclysms\models\block\starscorched_slate.json
 d6f8e9ce0b473c6a1ba91507d4cf7ce84900ba57 assets\cataclysms\models\item\testing_block_v2.json
 fed3c2316318619a1cd1d65d954f3f41f0bc0719 assets\cataclysms\models\item\cataclysm_debug.json
@@ -18,4 +19,6 @@ fed3c2316318619a1cd1d65d954f3f41f0bc0719 assets\cataclysms\models\item\cataclysm
 a3e37f9996e7cc1f07904e10eed430624e57b6f0 assets\cataclysms\models\item\testing_block_v3.json
 d9ac03ed3e6871f75d840a25ebb855700c98a9e5 assets\cataclysms\models\item\starmetal_scrap.json
 8de2425fdedbea6d57e0f0bc41078d3e1e1eefdb assets\cataclysms\blockstates\testing_block_v3.json
+feeac6d60e427fc2946ad16c87d874effa4595e7 assets\cataclysms\models\item\frostfall.json
 bd0bbe0de4f14fc676e6418bb88a19e238f9bc89 assets\cataclysms\models\item\cataclysm_items.json
+ca39333e33a718d17a46f8c9eae8e5a210e443ef assets\cataclysms\models\item\magicbane.json

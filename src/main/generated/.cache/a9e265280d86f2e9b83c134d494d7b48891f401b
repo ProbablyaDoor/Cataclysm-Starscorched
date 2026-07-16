@@ -1,3 +1,5 @@
-// 1.21.1	2026-07-15T18:06:31.3284996	Cataclysm: Starscorched/Tags for minecraft:item
+// 1.21.1	2026-07-16T15:44:34.3246241	Cataclysm: Starscorched/Tags for minecraft:item
+f50238e656fb372803bc5fc38e91c1140fc5b21d data\minecraft\tags\item\enchantable\sword.json
 f60fb93f0734ef140ef723774ac7002b3c2e9596 data\cataclysms\tags\item\starscorched_items.json
+f50238e656fb372803bc5fc38e91c1140fc5b21d data\minecraft\tags\item\swords.json
 bc4fafe25abb85072b6379f16a4425a5f7fa1c0e data\cataclysms\tags\item\valid_pickaxes.json

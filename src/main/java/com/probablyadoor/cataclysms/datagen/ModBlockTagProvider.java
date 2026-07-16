@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms.datagen;
 
 import com.probablyadoor.cataclysms.block.ModBlocks;
+import com.probablyadoor.cataclysms.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.Registry;
@@ -28,5 +29,6 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.TESTING_BLOCK_REINFORCED)
                 .add(ModBlocks.STARSCORCHED_SLATE);
+
     }
 }

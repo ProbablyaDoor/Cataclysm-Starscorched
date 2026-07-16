@@ -34,7 +34,9 @@ public class ModItemGroups {
             FabricItemGroup.builder().icon(()-> new ItemStack(ModItems.CATACLYSM_WEAPONS))
                     .displayName(Text.translatable("itemgroup.cataclysms.cataclysm_weapons"))
                     .entries((displayContext, entries) -> {
-                        entries.add(ModBlocks.TESTING_BLOCK);
+                        entries.add(ModItems.DAYBREAKER);
+                        entries.add(ModItems.FROSTFALL);
+                        entries.add(ModItems.MAGICBANE);
                     }).build());
 
     public static final ItemGroup CATACLYSM_ADMIN = Registry.register(Registries.ITEM_GROUP,

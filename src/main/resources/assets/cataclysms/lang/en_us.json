@@ -1,10 +1,14 @@
 {
-  "item.cataclysms.starmetal_scrap": "§eStarscorched Scrap",
+  "item.cataclysms.starmetal_scrap": "Starscorched Scrap",
   "item.cataclysms.starmetal_ingot": "§eStarmetal Ingot",
   "item.cataclysms.mangosteen": "§bMangosteen",
 
+  "item.cataclysms.daybreaker": "§6Daybreaker",
+  "item.cataclysms.frostfall": "§9Frostfall",
+  "item.cataclysms.magicbane": "§5Magicbane",
 
-  "block.cataclysms.starscorched_slate": "§eStarscorched Slate",
+
+  "block.cataclysms.starscorched_slate": "Starscorched Slate",
 
 
   "block.cataclysms.testing_block": "§aTesting Block",
