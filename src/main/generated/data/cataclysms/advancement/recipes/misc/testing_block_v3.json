@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "cataclysms:testing_block"
+        "recipe": "cataclysms:testing_block_v3"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "cataclysms:testing_block"
+      "cataclysms:testing_block_v3"
     ]
   }
 }

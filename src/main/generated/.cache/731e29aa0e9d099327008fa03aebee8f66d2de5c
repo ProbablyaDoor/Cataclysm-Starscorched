@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-15T17:48:12.403608	Cataclysm: Starscorched/Model Definitions
+// 1.21.1	2026-07-15T18:06:31.3299962	Cataclysm: Starscorched/Model Definitions
 2d960e191ddb1a4989bba168890c25fed5c666c6 assets\cataclysms\blockstates\testing_block_v2.json
 574704f401a3831f202dd1fbeb206741ba5731f0 assets\cataclysms\models\block\testing_block_v2.json
 87c61fcb736f7e346a962ff824d68b678c5dd2d7 assets\cataclysms\blockstates\starscorched_slate.json
@@ -10,8 +10,8 @@
 458c69e56b41220e39a16b07a81953ed56f60f9e assets\cataclysms\models\block\starscorched_slate.json
 d6f8e9ce0b473c6a1ba91507d4cf7ce84900ba57 assets\cataclysms\models\item\testing_block_v2.json
 fed3c2316318619a1cd1d65d954f3f41f0bc0719 assets\cataclysms\models\item\cataclysm_debug.json
-0ac63269ef39914352100df831b37eb5f1b8cfaf assets\cataclysms\models\block\testing_block.json
 1018a9819c8c6ed5cb49f28e9f34b700e1e12133 assets\cataclysms\models\item\cataclysm_blocks.json
+0ac63269ef39914352100df831b37eb5f1b8cfaf assets\cataclysms\models\block\testing_block.json
 03fe9b739b35fc5a40f76a4db62321f85b4f3e34 assets\cataclysms\models\item\cataclysm_weapons.json
 51e4a79556eb9eea7421d9bd35ea65f336dfe760 assets\cataclysms\models\item\mangosteen.json
 2636f7ddbddede7a764d3a88485b7338ab0588e4 assets\cataclysms\models\item\starmetal_ingot.json

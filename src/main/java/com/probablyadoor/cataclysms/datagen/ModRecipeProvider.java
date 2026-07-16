@@ -27,16 +27,17 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         offerSmelting(exporter, STARSCORCHED_SMELTABLES, RecipeCategory.MISC, ModItems.STARMETAL_INGOT, 10.5f, 1000, "starmetal_ingot");
         offerBlasting(exporter, STARSCORCHED_SMELTABLES, RecipeCategory.MISC, ModItems.STARMETAL_INGOT, 10.5f, 500, "starmetal_ingot");
 
-        offer2x2CompactingRecipe(exporter, RecipeCategory.MISC, ModBlocks.TESTING_BLOCK, ModBlocks.TESTING_BLOCK_REINFORCED);
-        offer2x2CompactingRecipe(exporter, RecipeCategory.MISC, ModBlocks.TESTING_BLOCK_REINFORCED, ModBlocks.TESTING_BLOCK_UNBREAKABLE);
+        offer2x2CompactingRecipe(exporter, RecipeCategory.MISC, ModBlocks.TESTING_BLOCK_REINFORCED, ModBlocks.TESTING_BLOCK);
+        offer2x2CompactingRecipe(exporter, RecipeCategory.MISC, ModBlocks.TESTING_BLOCK_UNBREAKABLE, ModBlocks.TESTING_BLOCK_REINFORCED);
 
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CHAOS_TOOL)
-                .pattern("TRO")
-                .pattern("TRR")
-                .pattern("RTT")
+                .pattern("ROR")
+                .pattern(" R ")
+                .pattern(" R ")
                 .input('R', ModBlocks.TESTING_BLOCK_REINFORCED)
                 .input('O', Blocks.REDSTONE_BLOCK)
-                .input('T', Blocks.AIR);
+                .criterion(hasItem(ModItems.CHAOS_TOOL), conditionsFromItem(ModItems.CHAOS_TOOL))
+                .offerTo(exporter);
     }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "item": "minecraft:redstone_block"
+    },
+    "R": {
+      "item": "cataclysms:testing_block_v2"
+    }
+  },
+  "pattern": [
+    "ROR",
+    " R ",
+    " R "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cataclysms:chaos_tool"
+  }
+}
