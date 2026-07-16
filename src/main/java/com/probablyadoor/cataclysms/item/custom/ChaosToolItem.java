@@ -27,9 +27,11 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
+
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -57,6 +59,7 @@ public class ChaosToolItem extends Item {
             fireballEntity.setPos(user.getX(), user.getY()+1, user.getZ());
             fireballEntity.setItem(new ItemStack(Items.ENDER_PEARL));
             world.spawnEntity(fireballEntity);
+
         }
         return TypedActionResult.success(itemStack, world.isClient());
     }
