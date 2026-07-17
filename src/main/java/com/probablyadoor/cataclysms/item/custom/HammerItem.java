@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms.item.custom;
 
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
+import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -82,7 +83,7 @@ public class HammerItem extends MiningToolItem {
                     attacker.getX(),
                     attacker.getY(),
                     attacker.getZ(),
-                    SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR,
+                    SoundRegistry.ITEM_FROSTFALL_ATTACK,
                     SoundCategory.NEUTRAL,
                     0.5F,
                     0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F));

@@ -1,0 +1,26 @@
+{
+  "daybreaker_attack": {
+    "subtitle": "sound.cataclysms.daybreaker_attack",
+    "sounds": [
+      "cataclysms:daybreaker_attack_01",
+      "cataclysms:daybreaker_attack_02",
+      "cataclysms:daybreaker_attack_03"
+    ]
+  },
+  "frostfall_attack": {
+    "subtitle": "sound.cataclysms.frostfall_attack",
+    "sounds": [
+      "cataclysms:frostfall_attack_01",
+      "cataclysms:frostfall_attack_02",
+      "cataclysms:frostfall_attack_03"
+    ]
+  },
+  "magicbane_attack": {
+    "subtitle": "sound.cataclysms.magicbane_attack",
+    "sounds": [
+      "cataclysms:magicbane_attack_01",
+      "cataclysms:magicbane_attack_02",
+      "cataclysms:magicbane_attack_03"
+    ]
+  }
+}

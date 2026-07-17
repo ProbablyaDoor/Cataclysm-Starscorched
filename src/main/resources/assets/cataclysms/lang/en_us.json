@@ -27,5 +27,8 @@
   "tooltip.cataclysms.chaos_tool.shift_down":"§4This item has the capability to summon highly explosive fireballs",
   "tooltip.cataclysms.chaos_tool.shift_down2":"§4More functionality will be planned for later",
   "tooltip.cataclysms.chaos_tool.shift_down3":"§4USE AT YOUR OWN RISK",
-  "tooltip.cataclysms.chaos_tool": "Press §eSHIFT§r for more info"
+  "tooltip.cataclysms.chaos_tool": "Press §eSHIFT§r for more info",
+
+  "tooltip.cataclysms.magicbane.shift_down": "§4+1 damage per enchantment added",
+  "tooltip.cataclysms.magicbane": "Press §eSHIFT§r for more info"
 }

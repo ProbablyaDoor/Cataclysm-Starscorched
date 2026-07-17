@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms.item.custom;
 
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
+import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
@@ -27,12 +28,13 @@ public class DaybreakerItem extends SwordItem {
                     attacker.getX(),
                     attacker.getY(),
                     attacker.getZ(),
-                    SoundEvents.BLOCK_ANVIL_LAND,
+                    SoundRegistry.ITEM_DAYBREAKER_ATTACK,
                     SoundCategory.NEUTRAL,
                     0.5F,
-                    0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
+                    1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
             world.createExplosion(attacker, target.getX(), target.getY(), target.getZ(), 2, World.ExplosionSourceType.MOB);
         }
         return true;
     }
+
 }
