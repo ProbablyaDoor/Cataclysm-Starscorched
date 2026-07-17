@@ -30,5 +30,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.TESTING_BLOCK_REINFORCED)
                 .add(ModBlocks.STARSCORCHED_SLATE);
 
+        getOrCreateTagBuilder(ModTags.Blocks.NEEDS_FROSTFALL_TOOL)
+                .addTag(BlockTags.NEEDS_IRON_TOOL);
+
     }
 }

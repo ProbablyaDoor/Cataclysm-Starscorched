@@ -17,12 +17,12 @@ import java.util.function.Supplier;
 
 public enum ModToolMaterials implements ToolMaterial {
 
-    DAYBREAKER(ModTags.Blocks.INCORRECT_FOR_DAYBREAKER_TOOL, 999999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
-    FROSTFALL(ModTags.Blocks.INCORRECT_FOR_FROSTFALL_TOOL, 999999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
-    MAGICBANE(ModTags.Blocks.INCORRECT_FOR_MAGICBANE_TOOL, 999999, 9.0F, 4.0F, 30, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
-    AQUAFLORA(ModTags.Blocks.INCORRECT_FOR_AQUAFLORA_TOOL, 999999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
-    SUPERNOVA(ModTags.Blocks.INCORRECT_FOR_SUPERNOVA_TOOL, 999999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
-    ADMIN(ModTags.Blocks.INCORRECT_FOR_ADMIN_TOOL, 999999, 999999F, 999999F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModBlocks.TESTING_BLOCK_UNBREAKABLE}));
+    DAYBREAKER(ModTags.Blocks.INCORRECT_FOR_DAYBREAKER_TOOL, 9999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
+    FROSTFALL(ModTags.Blocks.INCORRECT_FOR_FROSTFALL_TOOL, 9999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
+    MAGICBANE(ModTags.Blocks.INCORRECT_FOR_MAGICBANE_TOOL, 9999, 9.0F, 4.0F, 30, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
+    AQUAFLORA(ModTags.Blocks.INCORRECT_FOR_AQUAFLORA_TOOL, 9999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
+    SUPERNOVA(ModTags.Blocks.INCORRECT_FOR_SUPERNOVA_TOOL, 9999, 9.0F, 4.0F, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModItems.STARMETAL_INGOT})),
+    ADMIN(ModTags.Blocks.INCORRECT_FOR_ADMIN_TOOL, 9999, 9999, 9999, 15, () -> Ingredient.ofItems(new ItemConvertible[]{ModBlocks.TESTING_BLOCK_UNBREAKABLE}));
 
 
     private final TagKey<Block> inverseTag;
@@ -32,43 +32,43 @@ public enum ModToolMaterials implements ToolMaterial {
     private final int enchantability;
     private final Supplier<Ingredient> repairIngredient;
 
-    private ModToolMaterials(final TagKey<Block> inverseTag, final int itemDurability, final float miningSpeed, final float attackDamage, final int enchantability, final Supplier<Ingredient> repairIngredient) {
+    ModToolMaterials(final TagKey<Block> inverseTag, final int itemDurability,final float miningSpeed,
+                     final float attackDamage, final int enchantability,final Supplier<Ingredient> repairIngredient) {
         this.inverseTag = inverseTag;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;
         this.attackDamage = attackDamage;
         this.enchantability = enchantability;
-        Objects.requireNonNull(repairIngredient);
         this.repairIngredient = Suppliers.memoize(repairIngredient::get);
     }
 
     @Override
     public int getDurability() {
-        return 0;
+        return this.itemDurability;
     }
 
     @Override
     public float getMiningSpeedMultiplier() {
-        return 0;
+        return this.miningSpeed;
     }
 
     @Override
     public float getAttackDamage() {
-        return 0;
+        return this.attackDamage;
     }
 
     @Override
     public TagKey<Block> getInverseTag() {
-        return null;
+        return this.inverseTag;
     }
 
     @Override
     public int getEnchantability() {
-        return 0;
+        return this.enchantability;
     }
 
     @Override
     public Ingredient getRepairIngredient() {
-        return null;
+        return this.repairIngredient.get();
     }
 }

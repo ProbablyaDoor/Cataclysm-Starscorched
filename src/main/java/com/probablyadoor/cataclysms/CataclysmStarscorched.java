@@ -4,8 +4,10 @@ import com.probablyadoor.cataclysms.block.ModBlocks;
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import com.probablyadoor.cataclysms.item.ModItemGroups;
 import com.probablyadoor.cataclysms.item.ModItems;
+import com.probablyadoor.cataclysms.util.HammerUsageEvent;
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents;
 import net.minecraft.util.Identifier;
 
 import org.slf4j.Logger;
@@ -23,6 +25,8 @@ public class CataclysmStarscorched implements ModInitializer {
 		ModBlocks.registerModBlocks();
 
 		ModDataComponentTypes.registerDataComponentTypes();
+
+		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
 	}
 
 	public static Identifier id(String path) {

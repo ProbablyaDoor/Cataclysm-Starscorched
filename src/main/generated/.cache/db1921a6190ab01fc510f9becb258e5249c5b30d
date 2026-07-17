@@ -1,4 +1,5 @@
-// 1.21.1	2026-07-16T15:44:34.3232049	Cataclysm: Starscorched/Tags for minecraft:block
+// 1.21.1	2026-07-17T00:05:45.5081966	Cataclysm: Starscorched/Tags for minecraft:block
 e7d12abbbb773ea9627b556f46b5791939aea28f data\minecraft\tags\block\mineable\pickaxe.json
+32b13946c4cd1f944b029659ccce5fcb2adad4ff data\cataclysms\tags\block\needs_frostfall_tool.json
 cdbf2aef425b519b2db5b8a0448f392e90a0ff10 data\minecraft\tags\block\needs_iron_tool.json
 20beef3ec156b23bce112acc14293c68701ce26a data\minecraft\tags\block\needs_diamond_tool.json
