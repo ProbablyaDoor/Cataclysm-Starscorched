@@ -15,6 +15,7 @@ public class CataclysmStarscorchedClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         registerRangedWeaponPredicates(ModItems.NIGHTVEIL);
+        System.out.println(ModItems.NIGHTVEIL instanceof CrossbowItem);
     }
     public static void registerRangedWeaponPredicates(Item item) {
         ModelPredicateProviderRegistry.register(item, Identifier.of("pull"), (itemStack, clientWorld, livingEntity, seed) -> {

@@ -34,6 +34,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.PICKAXES)
                 .add(ModItems.FROSTFALL);
 
+        getOrCreateTagBuilder(ItemTags.CROSSBOW_ENCHANTABLE)
+                .add(ModItems.NIGHTVEIL);
+
         getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE)
                 .add(ModItems.DAYBREAKER)
                 .add(ModItems.FROSTFALL)

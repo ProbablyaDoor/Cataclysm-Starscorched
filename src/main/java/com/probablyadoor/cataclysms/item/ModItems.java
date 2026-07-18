@@ -40,7 +40,9 @@ public class ModItems {
             .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.MAGICBANE, 2, -2.4f))));
 
     public static final Item NIGHTVEIL = registerItem("nightveil",
-    new NightveilItem(new Item.Settings().maxDamage(9999)));
+    new NightveilItem(new Item.Settings().maxDamage(9999).maxCount(1)));
+
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(CataclysmStarscorched.MOD_ID, name), item);
     }

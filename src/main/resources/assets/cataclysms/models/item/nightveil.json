@@ -1,5 +1,5 @@
 {
-  "parent": "item/generated",
+  "parent": "item/crossbow",
   "textures": {
     "layer0": "cataclysms:item/nightveil_standby"
   },
@@ -28,7 +28,8 @@
   "overrides": [
     {
       "predicate": {
-        "pulling": 1
+        "pulling": 1,
+        "pull": 0.0
       },
       "model": "cataclysms:item/nightveil_pulling_0"
     },

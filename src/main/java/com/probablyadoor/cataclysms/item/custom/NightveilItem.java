@@ -18,14 +18,18 @@ public class NightveilItem extends CrossbowItem {
     }
 
     @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.CROSSBOW;
+    }
+
+
+    @Override
     public int getMaxUseTime(ItemStack stack, LivingEntity user) {
         return 72000;
     }
     public static boolean hasProjectile(ItemStack itemStack, Item fireworkRocket) {
         ChargedProjectilesComponent projectiles = itemStack.get(DataComponentTypes.CHARGED_PROJECTILES);
-        if (projectiles != null && projectiles.contains(Items.FIREWORK_ROCKET)) {
-            return true;
-        }
-        return false;
+        return projectiles != null && projectiles.contains(Items.FIREWORK_ROCKET);
     }
+
 }
