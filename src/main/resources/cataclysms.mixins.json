@@ -10,7 +10,9 @@
 	},
 	"client": [
 		"armAnimations",
-		"HeldItemRendererMixin"
+		"HeldItemRendererMixin",
+		"ItemRendererMixin",
+		"ModelLoaderMixin"
 	],
 	"overwrites": {
 		"requireAnnotations": true
