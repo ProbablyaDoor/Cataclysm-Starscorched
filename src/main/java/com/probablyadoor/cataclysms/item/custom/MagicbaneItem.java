@@ -66,17 +66,14 @@ public class MagicbaneItem extends SwordItem {
             tooltip.add(Text.translatable("tooltip.cataclysms.magicbane"));
         }
 
-        // 1. Check for the live enchantments component directly on the item stack
         var itemEnchants = stack.get(DataComponentTypes.ENCHANTMENTS);
         int enchantCount = (itemEnchants != null) ? itemEnchants.getSize() : 0;
 
-        // 2. Display the bonus calculation directly on the tooltip if it has enchantments
         if (enchantCount > 0) {
             float bonusDamage = enchantCount * 1.0F;
 
-            // Format it to match Minecraft's clean item tooltip style (e.g. Blue text)
-            Text damageLine = Text.literal("+" + bonusDamage + " Enchantment Bonus Damage")
-                    .formatted(Formatting.BLUE);
+            Text damageLine = Text.literal("+" + bonusDamage + " Enchantment Damage")
+                    .formatted(Formatting.DARK_PURPLE);
 
             tooltip.add(damageLine);
         }

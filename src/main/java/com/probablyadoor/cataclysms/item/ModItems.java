@@ -1,10 +1,7 @@
 package com.probablyadoor.cataclysms.item;
 
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
-import com.probablyadoor.cataclysms.item.custom.ChaosToolItem;
-import com.probablyadoor.cataclysms.item.custom.DaybreakerItem;
-import com.probablyadoor.cataclysms.item.custom.HammerItem;
-import com.probablyadoor.cataclysms.item.custom.MagicbaneItem;
+import com.probablyadoor.cataclysms.item.custom.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
@@ -42,8 +39,8 @@ public class ModItems {
     public static final Item MAGICBANE = registerItem("magicbane", new MagicbaneItem(ModToolMaterials.MAGICBANE, new Item.Settings()
             .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.MAGICBANE, 2, -2.4f))));
 
-
-
+    public static final Item NIGHTVEIL = registerItem("nightveil",
+    new NightveilItem(new Item.Settings().maxDamage(9999)));
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(CataclysmStarscorched.MOD_ID, name), item);
     }

@@ -30,6 +30,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -38,6 +39,7 @@ import net.minecraft.world.WorldEvents;
 
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.logging.Level;
 
 public class ChaosToolItem extends Item {
 
@@ -58,6 +60,11 @@ public class ChaosToolItem extends Item {
 
         );
         if (!world.isClient) {
+            BlockPos frontOfPlayer = user.getBlockPos().offset(user.getMovementDirection(), 10);
+
+            LightningEntity lightningBolt = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
+            lightningBolt.setPosition(frontOfPlayer.toCenterPos());
+            world.spawnEntity(lightningBolt);
             FireballEntity fireballEntity = new FireballEntity(world, user, user.getPos(), 5);
             fireballEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
             fireballEntity.setPos(user.getX(), user.getY()+1, user.getZ());
@@ -67,7 +74,7 @@ public class ChaosToolItem extends Item {
             int currentUses = initialUses + 1;
             itemStack.set(ModDataComponentTypes.TOTAL_USES, currentUses);
         }
-        return TypedActionResult.success(itemStack, world.isClient());
+        return TypedActionResult.success(user.getStackInHand(hand));
     }
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {

@@ -37,6 +37,8 @@ public class ModItemGroups {
                         entries.add(ModItems.DAYBREAKER);
                         entries.add(ModItems.FROSTFALL);
                         entries.add(ModItems.MAGICBANE);
+                        entries.add(ModItems.NIGHTVEIL);
+
                     }).build());
 
     public static final ItemGroup CATACLYSM_ADMIN = Registry.register(Registries.ITEM_GROUP,

@@ -1,0 +1,6 @@
+{
+  "parent": "cataclysms:item/nightveil",
+  "textures": {
+    "layer0": "cataclysms:item/nightveil_pulling_1"
+  }
+}
