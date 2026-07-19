@@ -2,6 +2,7 @@ package com.probablyadoor.cataclysms;
 
 import com.probablyadoor.cataclysms.block.ModBlocks;
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
+import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.item.ModItemGroups;
 import com.probablyadoor.cataclysms.item.ModItems;
 import com.probablyadoor.cataclysms.particle.ModParticles;
@@ -22,16 +23,15 @@ public class CataclysmStarscorched implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItemGroups.registerItemGroups();
-
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
 		ModParticles.registerModParticles();
-
 		ModDataComponentTypes.registerDataComponentTypes();
-
 		PlayerBlockBreakEvents.BEFORE.register(new HammerUsageEvent());
-
 		SoundRegistry.initialize();
+
+		ModEntities.registerModEntities();
 	}
 
 	public static Identifier id(String path) {

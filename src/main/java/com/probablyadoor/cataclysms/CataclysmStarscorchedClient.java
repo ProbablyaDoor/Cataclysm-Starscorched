@@ -1,10 +1,15 @@
 package com.probablyadoor.cataclysms;
 
+import com.probablyadoor.cataclysms.entity.ModEntities;
+import com.probablyadoor.cataclysms.entity.client.FrostfallProjectileModel;
+import com.probablyadoor.cataclysms.entity.client.FrostfallProjectileRenderer;
 import com.probablyadoor.cataclysms.item.ModItems;
 import com.probablyadoor.cataclysms.item.custom.NightveilItem;
 import com.probablyadoor.cataclysms.keybind.ModKeyBinds;
 import com.probablyadoor.cataclysms.particle.ModParticles;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.LivingEntity;
@@ -21,6 +26,10 @@ public class CataclysmStarscorchedClient implements ClientModInitializer {
     public void onInitializeClient() {
         ModKeyBinds.registerKeys();
         ModParticles.registerParticleFactories();
+
+        EntityModelLayerRegistry.registerModelLayer(FrostfallProjectileModel.FROSTFALL, FrostfallProjectileModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.FROSTFALL, FrostfallProjectileRenderer::new);
+
         registerRangedWeaponPredicates(ModItems.NIGHTVEIL);
         //System.out.println(ModItems.NIGHTVEIL instanceof CrossbowItem);
     }

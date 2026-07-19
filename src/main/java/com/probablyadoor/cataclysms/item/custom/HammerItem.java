@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms.item.custom;
 
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
+import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.EquipmentSlot;
@@ -89,5 +90,26 @@ public class HammerItem extends MiningToolItem {
                     0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
         }
         return true;
+    }
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
+        world.playSound(
+                null,
+                user.getX(),
+                user.getY(),
+                user.getZ(),
+                SoundEvents.ITEM_TRIDENT_THROW,
+                SoundCategory.NEUTRAL,
+                0.5F,
+                0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
+
+        );
+        if (!world.isClient) {
+            FrostfallProjectileEntity frostfall = new FrostfallProjectileEntity(world, user);
+            frostfall.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
+            world.spawnEntity(frostfall);
+            user.getItemCooldownManager().set(this, 25);
+        }
+        return TypedActionResult.success(itemStack, world.isClient());
     }
 }
