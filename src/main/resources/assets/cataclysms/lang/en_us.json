@@ -34,6 +34,8 @@
   "tooltip.cataclysms.magicbane": "Press §eSHIFT§r for more info",
 
   "key.cataclysms.primaryatk": "Cataclysmic Weapon Primary Attack",
-  "key.cataclysms.secondaryatk": "Cataclysmic Weapon Secondary Attack"
+  "key.cataclysms.secondaryatk": "Cataclysmic Weapon Secondary Attack",
+
+  "effect.cataclysms.iced": "Iced"
 
 }

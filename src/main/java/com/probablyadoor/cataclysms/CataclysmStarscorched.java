@@ -2,6 +2,7 @@ package com.probablyadoor.cataclysms;
 
 import com.probablyadoor.cataclysms.block.ModBlocks;
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
+import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.item.ModItemGroups;
 import com.probablyadoor.cataclysms.item.ModItems;
@@ -25,6 +26,7 @@ public class CataclysmStarscorched implements ModInitializer {
 		ModItemGroups.registerItemGroups();
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+		ModEffects.registerEffects();
 
 		ModParticles.registerModParticles();
 		ModDataComponentTypes.registerDataComponentTypes();
