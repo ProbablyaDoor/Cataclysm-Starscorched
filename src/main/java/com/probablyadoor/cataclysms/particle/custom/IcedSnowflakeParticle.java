@@ -10,9 +10,9 @@ public class IcedSnowflakeParticle extends SpriteBillboardParticle {
                                  SpriteProvider spriteProvider, double xSpeed, double ySpeed, double zSpeed) {
         super(clientWorld, x, y, z, xSpeed, ySpeed, zSpeed);
 
-
-        this.velocityMultiplier = 0.8f;
-        this.scale *= 0.75F;
+        this.setAlpha(1.0F);
+        this.velocityMultiplier = 0.5f;
+        this.scale *= 1.5F;
         this.maxAge = (int)(Math.random() * 2.0) + 60;
         this.setSpriteForAge(spriteProvider);
 
@@ -22,6 +22,28 @@ public class IcedSnowflakeParticle extends SpriteBillboardParticle {
         float f = 1.0F - (this.age + tickDelta) / (this.maxAge * 1.5F);
         return this.scale * f;
     }
+    @Override
+    public int getBrightness(float tint) {
+        return 0xF000F0;
+    }
+
+    @Override
+    public void tick() {
+
+        super.tick();
+        this.prevPosX = this.x;
+        this.prevPosY = this.y;
+        this.prevPosZ = this.z;
+        if (this.age++ >= this.maxAge) {
+            this.markDead();
+        } else {
+            float f = (float)this.age / this.maxAge;
+            this.x = this.x - this.velocityX * f;
+            this.y = this.y - this.velocityY * f;
+            this.z = this.z - this.velocityZ * f;
+        }
+    }
+    @Override
     public ParticleTextureSheet getType() {
         return ParticleTextureSheet.PARTICLE_SHEET_LIT;
     }

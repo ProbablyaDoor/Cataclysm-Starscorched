@@ -4,6 +4,7 @@ import com.ibm.icu.text.Normalizer2;
 import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.item.ModItems;
+import com.probablyadoor.cataclysms.particle.ModParticles;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -14,6 +15,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
@@ -47,6 +49,17 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
     }
 
     public boolean isGrounded() {return inGround;}
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (this.getWorld() instanceof ServerWorld serverWorld) {
+            serverWorld.spawnParticles(ModParticles.ICED_SNOWFLAKE_PARTICLE,
+                    this.getX(), this.getY() + 0.5, this.getZ(), 1,
+                    0, 0, 0, 0);
+        }
+    }
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {

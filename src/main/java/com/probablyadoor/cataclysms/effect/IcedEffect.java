@@ -25,8 +25,8 @@ public class IcedEffect extends StatusEffect {
             World world = entity.getWorld();
             if (entity.getWorld() instanceof ServerWorld serverWorld) {
                 serverWorld.spawnParticles(ModParticles.ICED_SNOWFLAKE_PARTICLE,
-                        entity.getX(), entity.getY() + 0.5, entity.getZ(), 1,
-                        0, 0, 0, 0.1);
+                        entity.getX(), entity.getY() + 0.5, entity.getZ(), 2,
+                        0, 0.5, 0, 0.1);
             }
             return true;
         }
