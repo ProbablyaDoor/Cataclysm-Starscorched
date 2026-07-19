@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms.particle;
 
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
+import com.probablyadoor.cataclysms.particle.custom.IcedSnowflakeParticle;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
 import net.minecraft.client.particle.EndRodParticle;
@@ -13,6 +14,8 @@ import net.minecraft.util.Identifier;
 
 public class ModParticles {
     public static final SimpleParticleType MAGIC_SWEEP_PARTICLE = registerParticle("magic_sweep_particle", FabricParticleTypes.simple());
+    public static final SimpleParticleType ICED_SNOWFLAKE_PARTICLE = registerParticle("iced_snowflake_particle", FabricParticleTypes.simple());
+
 
 
     private static SimpleParticleType registerParticle(String name, SimpleParticleType particle) {
@@ -27,5 +30,6 @@ public class ModParticles {
         ParticleFactoryRegistry registry = ParticleFactoryRegistry.getInstance();
 
         registry.register(MAGIC_SWEEP_PARTICLE, SonicBoomParticle.Factory::new);
+        registry.register(ICED_SNOWFLAKE_PARTICLE, IcedSnowflakeParticle.Factory::new);
     }
 }

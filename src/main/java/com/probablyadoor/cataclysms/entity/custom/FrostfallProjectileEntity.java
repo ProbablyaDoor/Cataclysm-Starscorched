@@ -1,12 +1,14 @@
 package com.probablyadoor.cataclysms.entity.custom;
 
 import com.ibm.icu.text.Normalizer2;
+import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.item.ModItems;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
@@ -53,7 +55,7 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), 10);
         if (entity instanceof LivingEntity livingEntity) {
             World world = livingEntity.getWorld();
-            world.createExplosion(this, livingEntity.getX(), livingEntity.getY(), livingEntity.getZ(), 2, World.ExplosionSourceType.MOB);
+            livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 150, 0, false, false));
             world.playSound(
                     null,
                     this.getX(),

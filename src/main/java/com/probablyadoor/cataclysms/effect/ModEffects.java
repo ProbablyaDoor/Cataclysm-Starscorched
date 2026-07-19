@@ -13,7 +13,7 @@ import net.minecraft.util.Identifier;
 
 public class ModEffects {
     public static final RegistryEntry<StatusEffect> ICED = registerStatusEffect("iced",
-    new IcedEffect(StatusEffectCategory.NEUTRAL, 0)
+    new IcedEffect(StatusEffectCategory.NEUTRAL, 158186222)
     .addAttributeModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED,
             Identifier.of(CataclysmStarscorched.MOD_ID, "iced"), -1.0f,
             EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
@@ -26,6 +26,12 @@ public class ModEffects {
             .addAttributeModifier(EntityAttributes.PLAYER_ENTITY_INTERACTION_RANGE,
                     Identifier.of(CataclysmStarscorched.MOD_ID, "iced"), -1.0f,
                     EntityAttributeModifier.Operation.ADD_MULTIPLIED_TOTAL)
+            .addAttributeModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE,
+                    Identifier.of(CataclysmStarscorched.MOD_ID, "iced"), 1.0f,
+                    EntityAttributeModifier.Operation.ADD_VALUE)
+            .addAttributeModifier(EntityAttributes.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE,
+                    Identifier.of(CataclysmStarscorched.MOD_ID, "iced"), 1.0f,
+                    EntityAttributeModifier.Operation.ADD_VALUE)
     );
 
     private static RegistryEntry<StatusEffect> registerStatusEffect(String name, StatusEffect statusEffect) {
