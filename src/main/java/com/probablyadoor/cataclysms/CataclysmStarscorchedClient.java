@@ -2,8 +2,11 @@ package com.probablyadoor.cataclysms;
 
 import com.probablyadoor.cataclysms.item.ModItems;
 import com.probablyadoor.cataclysms.item.custom.NightveilItem;
+import com.probablyadoor.cataclysms.keybind.ModKeyBinds;
+import com.probablyadoor.cataclysms.particle.ModParticles;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
@@ -12,10 +15,14 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 
 public class CataclysmStarscorchedClient implements ClientModInitializer {
+
+
     @Override
     public void onInitializeClient() {
+        ModKeyBinds.registerKeys();
+        ModParticles.registerParticleFactories();
         registerRangedWeaponPredicates(ModItems.NIGHTVEIL);
-        System.out.println(ModItems.NIGHTVEIL instanceof CrossbowItem);
+        //System.out.println(ModItems.NIGHTVEIL instanceof CrossbowItem);
     }
     public static void registerRangedWeaponPredicates(Item item) {
         ModelPredicateProviderRegistry.register(item, Identifier.of("pull"), (itemStack, clientWorld, livingEntity, seed) -> {

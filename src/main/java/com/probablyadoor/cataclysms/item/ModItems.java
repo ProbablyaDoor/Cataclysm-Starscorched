@@ -3,6 +3,8 @@ package com.probablyadoor.cataclysms.item;
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
 import com.probablyadoor.cataclysms.item.custom.*;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.UnbreakableComponent;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registry;
@@ -33,11 +35,14 @@ public class ModItems {
     public static final Item CHAOS_TOOL = registerItem("chaos_tool", new ChaosToolItem(new Item.Settings().maxCount(1)));
 
     public static final Item DAYBREAKER = registerItem("daybreaker", new DaybreakerItem(ModToolMaterials.DAYBREAKER, new Item.Settings()
-            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.DAYBREAKER, 5, -2.4f))));
+            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.DAYBREAKER, 5, -2.4f))
+            .component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(true))));
     public static final Item FROSTFALL = registerItem("frostfall", new HammerItem(ModToolMaterials.FROSTFALL, new Item.Settings()
-            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.FROSTFALL, 4, -2.4f))));
+            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.FROSTFALL, 4, -2.4f))
+            .component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(true))));
     public static final Item MAGICBANE = registerItem("magicbane", new MagicbaneItem(ModToolMaterials.MAGICBANE, new Item.Settings()
-            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.MAGICBANE, 2, -2.4f))));
+            .attributeModifiers(SwordItem.createAttributeModifiers(ModToolMaterials.MAGICBANE, 2, -2.4f))
+            .component(DataComponentTypes.UNBREAKABLE, new UnbreakableComponent(true))));
 
     public static final Item NIGHTVEIL = registerItem("nightveil",
     new NightveilItem(new Item.Settings().maxDamage(9999).maxCount(1)));

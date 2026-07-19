@@ -31,5 +31,9 @@
   "tooltip.cataclysms.chaos_tool": "Press §eSHIFT§r for more info",
 
   "tooltip.cataclysms.magicbane.shift_down": "§4+1 damage per enchantment added",
-  "tooltip.cataclysms.magicbane": "Press §eSHIFT§r for more info"
+  "tooltip.cataclysms.magicbane": "Press §eSHIFT§r for more info",
+
+  "key.cataclysms.primaryatk": "Cataclysmic Weapon Primary Attack",
+  "key.cataclysms.secondaryatk": "Cataclysmic Weapon Secondary Attack"
+
 }

@@ -2,6 +2,7 @@ package com.probablyadoor.cataclysms.item.custom;
 
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import com.probablyadoor.cataclysms.item.ModItems;
+import com.probablyadoor.cataclysms.particle.ModParticles;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.DataComponentTypes;
@@ -12,6 +13,10 @@ import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleType;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -31,7 +36,18 @@ public class MagicbaneItem extends SwordItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
-        if (!world.isClient) {
+        if (!world.isClient && world instanceof ServerWorld serverWorld) {
+            serverWorld.spawnParticles(
+                    (ParticleEffect) ModParticles.MAGIC_SWEEP_PARTICLE,
+                    target.getX(),
+                    target.getY() + 1.0,
+                    target.getZ(),
+                    1,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+            );
             world.playSound(
                     null,
                     attacker.getX(),
