@@ -70,7 +70,12 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
         entity.damage(this.getDamageSources().thrown(this, this.getOwner()), 10);
         if (entity instanceof LivingEntity livingEntity) {
             World world = livingEntity.getWorld();
-            livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 150, 0, false, false));
+            if (!world.isClient) {
+                IceCrystalEntity iceCrystalEntity = new IceCrystalEntity(ModEntities.ICE_CRYSTAL, world);
+                iceCrystalEntity.setPosition(this.getPos());
+                world.spawnEntity(iceCrystalEntity);
+
+            }
             world.playSound(
                     null,
                     this.getX(),

@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 public class IceCrystalEntity extends PathAwareEntity {
 
-    private int lifeTime = 100;
+    public int lifeTime = 100;
 
     public IceCrystalEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -51,7 +51,7 @@ public class IceCrystalEntity extends PathAwareEntity {
         }
 
         //AOE
-        int radius = 6;
+        int radius = 10;
 
         if (!this.getWorld().isClient()) {
             if (this.age % 10 == 0) {
@@ -59,7 +59,9 @@ public class IceCrystalEntity extends PathAwareEntity {
                         this.getX() - radius, this.getY() - (float) radius / 3, this.getZ() - radius);
                 for (Entity entities : this.getWorld().getOtherEntities(this, box, EntityPredicates.VALID_LIVING_ENTITY)) {
                     if ((entities instanceof LivingEntity livingEntity) && livingEntity != this && !(livingEntity instanceof IceCrystalEntity)) {
-                                livingEntity.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 20, 0), this);
+                        livingEntity.damage(livingEntity.getDamageSources().freeze(), 5);
+                        if (livingEntity.distanceTo(this) > radius-2)
+                            livingEntity.setVelocity((this.getX() - livingEntity.getX()) / 4, (this.getY() - livingEntity.getY()) / 4, (this.getZ() - livingEntity.getZ()) / 4);
                              }
                         }
                     }
