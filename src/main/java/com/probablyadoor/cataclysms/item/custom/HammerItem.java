@@ -98,7 +98,7 @@ public class HammerItem extends MiningToolItem {
                 user.getX(),
                 user.getY(),
                 user.getZ(),
-                SoundEvents.ITEM_TRIDENT_THROW,
+                SoundRegistry.ITEM_FROSTFALL_THROW,
                 SoundCategory.NEUTRAL,
                 0.5F,
                 0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)

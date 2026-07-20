@@ -14,6 +14,10 @@ public class SoundRegistry {
     public static final SoundEvent ITEM_DAYBREAKER_ATTACK = registerSound("daybreaker_attack");
     public static final SoundEvent ITEM_FROSTFALL_ATTACK = registerSound("frostfall_attack");
     public static final SoundEvent ITEM_MAGICGBANE_ATTACK = registerSound("magicbane_attack");
+    public static final SoundEvent ITEM_FROSTFALL_THROW = registerSound("frostfall_throw");
+    public static final SoundEvent ITEM_FROSTFALL_HIT = registerSound("frostfall_hit");
+
+
 
     // actual registration of all the custom SoundEvents
     private static SoundEvent registerSound(String id) {

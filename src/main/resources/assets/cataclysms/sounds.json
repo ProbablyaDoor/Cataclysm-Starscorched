@@ -22,5 +22,24 @@
       "cataclysms:magicbane_attack_02",
       "cataclysms:magicbane_attack_03"
     ]
+  },
+  "frostfall_throw": {
+    "subtitle": "sound.cataclysms.frostfall_throw",
+    "sounds": [
+      "cataclysms:frostfall_throw",
+      "cataclysms:frostfall_throw_1",
+      "cataclysms:frostfall_throw_2"
+    ]
+  },
+  "frostfall_hit": {
+    "subtitle": "sound.cataclysms.frostfall_hit",
+    "sounds": [
+      "cataclysms:frostfall_hit_01",
+      "cataclysms:frostfall_hit_02",
+      "cataclysms:frostfall_hit_03",
+      "cataclysms:frostfall_hit_04",
+      "cataclysms:frostfall_hit_05"
+    ]
   }
+
 }

@@ -61,10 +61,6 @@ public class ChaosToolItem extends Item {
         );
         if (!world.isClient) {
             BlockPos frontOfPlayer = user.getBlockPos().offset(user.getMovementDirection(), 10);
-
-            LightningEntity lightningBolt = new LightningEntity(EntityType.LIGHTNING_BOLT, world);
-            lightningBolt.setPosition(frontOfPlayer.toCenterPos());
-            world.spawnEntity(lightningBolt);
             FireballEntity fireballEntity = new FireballEntity(world, user, user.getPos(), 5);
             fireballEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
             fireballEntity.setPos(user.getX(), user.getY()+1, user.getZ());

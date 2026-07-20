@@ -5,6 +5,7 @@ import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.item.ModItems;
 import com.probablyadoor.cataclysms.particle.ModParticles;
+import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
@@ -15,6 +16,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -55,7 +57,7 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
         super.tick();
 
         if (this.getWorld() instanceof ServerWorld serverWorld) {
-            serverWorld.spawnParticles(ModParticles.ICED_SNOWFLAKE_PARTICLE,
+            serverWorld.spawnParticles(ParticleTypes.CLOUD,
                     this.getX(), this.getY() + 0.5, this.getZ(), 1,
                     0, 0, 0, 0);
         }
@@ -74,7 +76,7 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
                     this.getX(),
                     this.getY(),
                     this.getZ(),
-                    SoundEvents.BLOCK_ANVIL_LAND,
+                    SoundRegistry.ITEM_FROSTFALL_HIT,
                     SoundCategory.NEUTRAL,
                     1.5F,
                     0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
@@ -96,15 +98,15 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
                 this.getX(),
                 this.getY(),
                 this.getZ(),
-                SoundEvents.BLOCK_ANVIL_LAND,
+                SoundRegistry.ITEM_FROSTFALL_HIT,
                 SoundCategory.NEUTRAL,
                 1.5F,
                 0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
         );
         if (!world.isClient) {
-            PigEntity pigEntity = new PigEntity(EntityType.PIG, world);
-            pigEntity.setPosition(this.getPos());
-            world.spawnEntity(pigEntity);
+            IceCrystalEntity iceCrystalEntity = new IceCrystalEntity(ModEntities.ICE_CRYSTAL, world);
+            iceCrystalEntity.setPosition(this.getPos());
+            world.spawnEntity(iceCrystalEntity);
 
         }
 

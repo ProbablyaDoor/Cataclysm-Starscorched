@@ -12,7 +12,7 @@ public class IcedSnowflakeParticle extends SpriteBillboardParticle {
 
         this.setAlpha(1.0F);
         this.velocityMultiplier = 0.5f;
-        this.scale *= 1.5F;
+        this.scale *= 0.65F;
         this.maxAge = (int)(Math.random() * 2.0) + 60;
         this.setSpriteForAge(spriteProvider);
 

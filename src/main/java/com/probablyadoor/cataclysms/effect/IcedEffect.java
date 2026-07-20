@@ -6,6 +6,8 @@ import net.minecraft.block.Blocks;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -24,9 +26,16 @@ public class IcedEffect extends StatusEffect {
             entity.setFrozenTicks(160);
             World world = entity.getWorld();
             if (entity.getWorld() instanceof ServerWorld serverWorld) {
+                float entityHeight = entity.getHeight();
+                float entityWidth = entity.getWidth();
+
                 serverWorld.spawnParticles(ModParticles.ICED_SNOWFLAKE_PARTICLE,
-                        entity.getX(), entity.getY() + 0.5, entity.getZ(), 2,
-                        0, 0.5, 0, 0.1);
+                        entity.getX(), entity.getY(), entity.getZ(), 2,
+                        entityWidth*0.45, entityHeight*0.45, entityWidth*0.45, 0);
+                serverWorld.spawnParticles(ParticleTypes.SNOWFLAKE,
+                        entity.getX(), entity.getY(), entity.getZ(), 10,
+                        entityWidth*0.25, 0, entityWidth*0.25, 0);
+
             }
             return true;
         }
