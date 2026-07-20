@@ -111,5 +111,6 @@ public class HammerItem extends MiningToolItem {
             user.getItemCooldownManager().set(this, 25);
         }
         return TypedActionResult.success(itemStack, world.isClient());
+
     }
 }

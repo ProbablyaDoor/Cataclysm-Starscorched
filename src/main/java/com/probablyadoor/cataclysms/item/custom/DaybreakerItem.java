@@ -33,6 +33,8 @@ public class DaybreakerItem extends SwordItem {
                     0.5F,
                     1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
             world.createExplosion(attacker, target.getX(), target.getY(), target.getZ(), 2, World.ExplosionSourceType.MOB);
+
+
         }
         return true;
     }

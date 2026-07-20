@@ -12,7 +12,8 @@
 		"armAnimations",
 		"HeldItemRendererMixin",
 		"ItemRendererMixin",
-		"ModelLoaderMixin"
+		"ModelLoaderMixin",
+		"AttackMixin"
 	],
 	"overwrites": {
 		"requireAnnotations": true
