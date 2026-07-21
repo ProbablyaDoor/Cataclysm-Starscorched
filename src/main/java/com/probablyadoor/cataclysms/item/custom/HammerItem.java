@@ -4,8 +4,11 @@ import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
@@ -75,6 +78,17 @@ public class HammerItem extends MiningToolItem {
     public void postDamageEntity(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
     }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, world, entity, slot, selected);
+        if (!world.isClient) {
+            if (entity instanceof LivingEntity user) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 220, 0, false, false));
+            }
+        }
+    }
+
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
@@ -93,23 +107,29 @@ public class HammerItem extends MiningToolItem {
     }
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        world.playSound(
-                null,
-                user.getX(),
-                user.getY(),
-                user.getZ(),
-                SoundRegistry.ITEM_FROSTFALL_THROW,
-                SoundCategory.NEUTRAL,
-                0.5F,
-                0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
 
-        );
         if (!world.isClient) {
-            FrostfallProjectileEntity frostfall = new FrostfallProjectileEntity(world, user);
-            frostfall.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
-            world.spawnEntity(frostfall);
-            frostfall.owner = user;
-            user.getItemCooldownManager().set(this, 25);
+            if (!user.isSneaking()) {
+                world.playSound(
+                        null,
+                        user.getX(),
+                        user.getY(),
+                        user.getZ(),
+                        SoundRegistry.ITEM_FROSTFALL_THROW,
+                        SoundCategory.NEUTRAL,
+                        0.5F,
+                        0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
+                );
+                FrostfallProjectileEntity frostfall = new FrostfallProjectileEntity(world, user);
+                frostfall.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
+                world.spawnEntity(frostfall);
+                frostfall.owner = user;
+                user.getItemCooldownManager().set(this, 25);
+            } else {
+                user.getItemCooldownManager().set(this, 50);
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
+            }
+
         }
         return TypedActionResult.success(itemStack, world.isClient());
 

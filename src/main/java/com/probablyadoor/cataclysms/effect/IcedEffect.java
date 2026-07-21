@@ -24,6 +24,11 @@ public class IcedEffect extends StatusEffect {
     public boolean applyUpdateEffect(LivingEntity entity, int amplifier) {
         if(entity.isAlive()) {
             entity.setFrozenTicks(160);
+            double x = entity.getX();
+            double y = entity.getY();
+            double z = entity.getZ();
+            entity.teleport(x, y, z, false);
+            entity.setVelocity(0, 0, 0);
             World world = entity.getWorld();
             if (entity.getWorld() instanceof ServerWorld serverWorld) {
                 float entityHeight = entity.getHeight();

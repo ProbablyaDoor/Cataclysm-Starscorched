@@ -10,9 +10,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 
 public class IceCrystalRenderer extends MobEntityRenderer<IceCrystalEntity, IceCrystalModel<IceCrystalEntity>> {
-    int[] rgbColorOne = {13, 2, 125};
-    int[] rgbColorTwo = {20, 0, 237};
-    int[] rgbColorThree = {102, 88, 252};
+    int[] rgbColorOne = {10, 15, 94};
+    int[] rgbColorTwo = {25, 121, 238};
+    int[] rgbColorThree = {113, 235, 255};
     int[] rgbColorFour = {13, 3, 128};
     double[] translation = {0, 1, 0};
 

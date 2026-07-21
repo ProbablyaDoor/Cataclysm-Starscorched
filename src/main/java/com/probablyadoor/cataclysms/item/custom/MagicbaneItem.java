@@ -11,6 +11,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.particle.ParticleEffect;
@@ -31,6 +33,19 @@ import java.util.List;
 public class MagicbaneItem extends SwordItem {
     public MagicbaneItem(ToolMaterial material, Settings settings) {
         super(material, settings);
+    }
+
+    @Override
+    public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
+        super.inventoryTick(stack, world, entity, slot, selected);
+        if (!world.isClient) {
+            if (entity instanceof LivingEntity user) {
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, 220, 1, false, false));
+                user.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, 220, 0, false, false));
+
+
+            }
+        }
     }
 
     @Override
