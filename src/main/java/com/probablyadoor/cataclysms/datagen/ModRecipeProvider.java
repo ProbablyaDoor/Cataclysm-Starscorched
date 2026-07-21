@@ -39,5 +39,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('O', Blocks.REDSTONE_BLOCK)
                 .criterion(hasItem(ModItems.CHAOS_TOOL), conditionsFromItem(ModItems.CHAOS_TOOL))
                 .offerTo(exporter);
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CHAOS_TOOL)
+                .pattern("ROR")
+                .pattern(" R ")
+                .pattern(" R ")
+                .input('R', ModBlocks.TESTING_BLOCK_REINFORCED)
+                .input('O', Blocks.REDSTONE_BLOCK)
+                .criterion(hasItem(ModItems.CHAOS_TOOL), conditionsFromItem(ModItems.CHAOS_TOOL))
+                .offerTo(exporter);
     }
 }

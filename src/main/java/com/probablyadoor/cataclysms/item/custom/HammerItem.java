@@ -108,6 +108,7 @@ public class HammerItem extends MiningToolItem {
             FrostfallProjectileEntity frostfall = new FrostfallProjectileEntity(world, user);
             frostfall.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
             world.spawnEntity(frostfall);
+            frostfall.owner = user;
             user.getItemCooldownManager().set(this, 25);
         }
         return TypedActionResult.success(itemStack, world.isClient());

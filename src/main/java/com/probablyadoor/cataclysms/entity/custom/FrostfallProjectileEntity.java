@@ -10,8 +10,6 @@ import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.passive.PigEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -28,6 +26,7 @@ import net.minecraft.world.World;
 public class FrostfallProjectileEntity extends PersistentProjectileEntity {
     private float rotation;
     public Vector2f groundedOffset;
+    public PlayerEntity owner;
 
     public FrostfallProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -74,6 +73,7 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
                 IceCrystalEntity iceCrystalEntity = new IceCrystalEntity(ModEntities.ICE_CRYSTAL, world);
                 iceCrystalEntity.setPosition(this.getPos());
                 world.spawnEntity(iceCrystalEntity);
+                iceCrystalEntity.owner = this.owner;
 
             }
             world.playSound(
@@ -112,6 +112,7 @@ public class FrostfallProjectileEntity extends PersistentProjectileEntity {
             IceCrystalEntity iceCrystalEntity = new IceCrystalEntity(ModEntities.ICE_CRYSTAL, world);
             iceCrystalEntity.setPosition(this.getPos());
             world.spawnEntity(iceCrystalEntity);
+            iceCrystalEntity.owner = this.owner;
 
         }
 

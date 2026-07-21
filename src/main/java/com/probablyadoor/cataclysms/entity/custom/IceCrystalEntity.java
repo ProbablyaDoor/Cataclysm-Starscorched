@@ -3,6 +3,7 @@ package com.probablyadoor.cataclysms.entity.custom;
 import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.particle.ModParticles;
+import com.probablyadoor.cataclysms.util.FriendlyFireCheck;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +14,7 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
@@ -23,6 +25,7 @@ import net.minecraft.world.World;
 public class IceCrystalEntity extends PathAwareEntity {
 
     public int lifeTime = 100;
+    public PlayerEntity owner;
 
     public IceCrystalEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -58,7 +61,7 @@ public class IceCrystalEntity extends PathAwareEntity {
                 Box box = new Box(this.getX() + radius, this.getY() + (float) radius / 3, this.getZ() + radius,
                         this.getX() - radius, this.getY() - (float) radius / 3, this.getZ() - radius);
                 for (Entity entities : this.getWorld().getOtherEntities(this, box, EntityPredicates.VALID_LIVING_ENTITY)) {
-                    if ((entities instanceof LivingEntity livingEntity) && livingEntity != this && !(livingEntity instanceof IceCrystalEntity)) {
+                    if ((entities instanceof LivingEntity livingEntity) && FriendlyFireCheck.isFriendlyFire(livingEntity, owner) && livingEntity != owner && !(livingEntity instanceof IceCrystalEntity)) {
                         livingEntity.damage(livingEntity.getDamageSources().freeze(), 5);
                         if (livingEntity.distanceTo(this) > radius-2)
                             livingEntity.setVelocity((this.getX() - livingEntity.getX()) / 4, (this.getY() - livingEntity.getY()) / 4, (this.getZ() - livingEntity.getZ()) / 4);
