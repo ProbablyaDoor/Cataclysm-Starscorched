@@ -1,10 +1,7 @@
 package com.probablyadoor.cataclysms.entity.custom;
 
-import com.ibm.icu.text.Normalizer2;
-import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.item.ModItems;
-import com.probablyadoor.cataclysms.particle.ModParticles;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
@@ -17,7 +14,6 @@ import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.Direction;

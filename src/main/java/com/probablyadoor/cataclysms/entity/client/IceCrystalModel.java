@@ -1,15 +1,12 @@
 package com.probablyadoor.cataclysms.entity.client;
 
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
-import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.entity.custom.IceCrystalEntity;
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 
 // Made with Blockbench 4.10.3

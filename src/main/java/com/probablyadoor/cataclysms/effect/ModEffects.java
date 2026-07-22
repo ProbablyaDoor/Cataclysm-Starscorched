@@ -1,7 +1,6 @@
 package com.probablyadoor.cataclysms.effect;
 
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.effect.StatusEffect;

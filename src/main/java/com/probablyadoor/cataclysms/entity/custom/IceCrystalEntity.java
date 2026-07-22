@@ -1,7 +1,5 @@
 package com.probablyadoor.cataclysms.entity.custom;
 
-import com.probablyadoor.cataclysms.effect.ModEffects;
-import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.particle.ModParticles;
 import com.probablyadoor.cataclysms.util.FriendlyFireCheck;
 import net.minecraft.entity.Entity;
@@ -10,8 +8,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,7 +15,6 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Box;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class IceCrystalEntity extends PathAwareEntity {

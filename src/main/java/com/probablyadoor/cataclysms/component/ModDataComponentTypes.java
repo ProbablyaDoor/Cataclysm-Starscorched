@@ -3,13 +3,9 @@ package com.probablyadoor.cataclysms.component;
 import com.mojang.serialization.Codec;
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
 import net.minecraft.component.ComponentType;
-import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.UseAction;
-import net.minecraft.util.math.BlockPos;
 
 import java.util.function.UnaryOperator;
 

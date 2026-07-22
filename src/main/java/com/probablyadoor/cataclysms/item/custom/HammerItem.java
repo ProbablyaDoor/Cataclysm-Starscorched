@@ -1,6 +1,5 @@
 package com.probablyadoor.cataclysms.item.custom;
 
-import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import net.minecraft.block.BlockState;
@@ -10,15 +9,12 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
