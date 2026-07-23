@@ -3,7 +3,7 @@
 
 
 ## What is it?
-Cataclysm: Starscorched or just Cataclysm is my first ever attempt at making a Minecraft mod. It adds a new weapon progression into the game with 
+*Cataclysm: Starscorched* or just Cataclysm is my first ever attempt at making a Minecraft mod. It adds a new weapon progression into the game with 
 custom attacks, systems and detailed models. It also adds custom blocks, items, mobs and minibosses to the game, which are vital in the process of
 making each weapon. Lastly, every weapon will be made with a new crafting system, based on a "multiblock," a structure made from a large chunk of
 blocks rather than just a single station. 
@@ -43,10 +43,10 @@ Then, add the dependencies of the mod
 
 **If you are using Linux the .minecraft directory is stored in ~/.minecraft**
 
-**For Mac, .minecraft is at ~/Library/Application Support/minecraft**
+**For Mac .minecraft is located at ~/Library/Application Support/minecraft**
 
 ## AI DISCLOSURE:
-Almost no AI was used in the making of the project. However, it was used for fixing a certain bug involving one of the weapons that almost
+**Almost no AI was used in the making of the project.** However, it was used for fixing a certain bug involving one of the weapons that almost
 caused me to scrap it entirely due to how janky Minecraft's source code is. It was also partially used to help me understand how to create
 different events, but most of the help came from the Fabric documentation and tutorials.
 
@@ -55,11 +55,13 @@ different events, but most of the help came from the Fabric documentation and tu
 This mod was created from a joke about me hosting an event where one player would get extremely unfair and overpowered Minecraft weapons. **HARRY YAO**
 suggested a weapon to me and thus, Cataclysm: Starscorched was born.
 
-Weapons and mobs are inspired by other mods such as: [Celestisynth](https://www.curseforge.com/minecraft/mc-mods/celestisynth),
+Weapons and mobs are inspired by other mods such as: 
+[Celestisynth](https://www.curseforge.com/minecraft/mc-mods/celestisynth),
 [Simply Swords](https://modrinth.com/mod/simply-swords),
 [Marium's Soulslike Weaponry](https://modrinth.com/mod/mariums-soulslike-weaponry),
 [Reliquary](https://www.curseforge.com/minecraft/mc-mods/reliquary-reincarnations),
 and [Scape and Run: Parasites](https://www.curseforge.com/minecraft/mc-mods/scape-and-run-parasites).
+
 In NO way does this relate to [L_Ender's Cataclysm](https://www.curseforge.com/minecraft/mc-mods/lendercataclysm),
 a mod with a similar name to this one. Some of the weapons are sort of derived from their source
 material. However, two of them (currently) are just the weapons from their respective mods, only on steroids due to my *amazing* balancing skills.
