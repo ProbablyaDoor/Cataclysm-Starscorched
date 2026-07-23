@@ -23,7 +23,7 @@ public class ModBlocks {
                     .requiresTool().sounds(BlockSoundGroup.COPPER)));
 
     public static final Block TESTING_BLOCK_UNBREAKABLE = registerBlock("testing_block_v3",
-            new Block(AbstractBlock.Settings.create().strength(10000f)
+            new Block(AbstractBlock.Settings.create().strength(-1f)
                     .requiresTool().sounds(BlockSoundGroup.NETHERITE)));
 
     public static final Block STARSCORCHED_SLATE = registerBlock("starscorched_slate",
