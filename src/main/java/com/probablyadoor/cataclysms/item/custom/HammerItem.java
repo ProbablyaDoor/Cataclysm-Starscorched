@@ -2,6 +2,8 @@ package com.probablyadoor.cataclysms.item.custom;
 
 import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
+import mod.chloeprime.aaaparticles.api.common.AAALevel;
+import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
@@ -14,8 +16,10 @@ import net.minecraft.item.MiningToolItem;
 import net.minecraft.item.ToolMaterial;
 import net.minecraft.registry.tag.BlockTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -27,6 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HammerItem extends MiningToolItem {
+    private static final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostring")).scale(0.35F, 0.35F, 0.35F);
+
+
     public HammerItem(ToolMaterial material, Settings settings) {
         super(material, BlockTags.PICKAXE_MINEABLE, settings);
     }
@@ -88,7 +95,8 @@ public class HammerItem extends MiningToolItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
-        if (!world.isClient) {
+        if (!world.isClient && world instanceof ServerWorld serverWorld) {
+            AAALevel.addParticle(serverWorld, false, FROSTRING.clone().position(target.getX(), target.getY(), target.getZ()));
             world.playSound(
                     null,
                     attacker.getX(),

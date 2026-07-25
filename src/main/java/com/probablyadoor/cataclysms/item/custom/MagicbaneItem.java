@@ -1,7 +1,8 @@
 package com.probablyadoor.cataclysms.item.custom;
 
-import com.probablyadoor.cataclysms.particle.ModParticles;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
+import mod.chloeprime.aaaparticles.api.common.AAALevel;
+import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
@@ -11,11 +12,11 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.particle.ParticleEffect;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 
@@ -25,6 +26,8 @@ public class MagicbaneItem extends SwordItem {
     public MagicbaneItem(ToolMaterial material, Settings settings) {
         super(material, settings);
     }
+
+    private static final ParticleEmitterInfo VOIDSLASH = new ParticleEmitterInfo(Identifier.of("cataclysms", "voidslash"));
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -43,17 +46,7 @@ public class MagicbaneItem extends SwordItem {
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
         if (!world.isClient && world instanceof ServerWorld serverWorld) {
-            serverWorld.spawnParticles(
-                    (ParticleEffect) ModParticles.MAGIC_SWEEP_PARTICLE,
-                    target.getX(),
-                    target.getY() + 1.0,
-                    target.getZ(),
-                    1,
-                    0.0,
-                    0.0,
-                    0.0,
-                    0.0
-            );
+            AAALevel.addParticle(serverWorld, false, VOIDSLASH.clone().position(target.getX(), target.getY()+1.5d, target.getZ()));
             world.playSound(
                     null,
                     attacker.getX(),
