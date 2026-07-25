@@ -14,7 +14,6 @@ public class ModParticles {
     public static final SimpleParticleType MAGIC_SWEEP_PARTICLE = registerParticle("magic_sweep_particle", FabricParticleTypes.simple());
     public static final SimpleParticleType ICED_SNOWFLAKE_PARTICLE = registerParticle("iced_snowflake_particle", FabricParticleTypes.simple());
 
-
     private static SimpleParticleType registerParticle(String name, SimpleParticleType particle) {
         return Registry.register(Registries.PARTICLE_TYPE, Identifier.of(CataclysmStarscorched.MOD_ID, name), particle);
     }

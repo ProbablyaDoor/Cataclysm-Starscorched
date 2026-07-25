@@ -33,7 +33,6 @@ import java.util.List;
 public class HammerItem extends MiningToolItem {
     private static final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostring")).scale(0.35F, 0.35F, 0.35F);
 
-
     public HammerItem(ToolMaterial material, Settings settings) {
         super(material, BlockTags.PICKAXE_MINEABLE, settings);
     }
@@ -132,6 +131,7 @@ public class HammerItem extends MiningToolItem {
             } else {
                 user.getItemCooldownManager().set(this, 50);
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
+
             }
 
         }

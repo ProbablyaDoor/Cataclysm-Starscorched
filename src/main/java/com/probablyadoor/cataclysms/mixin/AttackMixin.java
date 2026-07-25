@@ -2,14 +2,14 @@ package com.probablyadoor.cataclysms.mixin;
 
 import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.item.ModItems;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import mod.chloeprime.aaaparticles.api.common.AAALevel;
+import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -28,20 +28,15 @@ public class AttackMixin {
 
     @Unique
     private void frostfallCrit(LivingEntity target) {
+        final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostcube")).scale(target.getWidth()*0.525F, target.getHeight()*0.3F, target.getWidth()*0.525F);
         PlayerEntity player = (PlayerEntity) (Object) this;
         World world = target.getWorld();
         float cooldown = player.getAttackCooldownProgress(0.5F);
         boolean charged = cooldown > 0.9F;
         if (isCritical(player, charged)) {
+            AAALevel.addParticle(world, false, FROSTRING.clone().position(target.getX(), target.getY(), target.getZ()));
             if (player.isHolding(ModItems.FROSTFALL)) {
                 target.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 150, 0, false, false));
-                BlockPos pos = BlockPos.ofFloored(target.getX(), target.getY(), target.getZ());
-                BlockPos pos2 = BlockPos.ofFloored(target.getX(), target.getY() + 1, target.getZ());
-                BlockState state = Blocks.FROSTED_ICE.getDefaultState();
-                if (world.getBlockState(pos) == Blocks.AIR.getDefaultState())
-                    world.setBlockState(pos, state);
-                if (world.getBlockState(pos2) == Blocks.AIR.getDefaultState())
-                    world.setBlockState(pos2, state);
             }
 
         }

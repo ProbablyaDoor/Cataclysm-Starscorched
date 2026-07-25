@@ -1,6 +1,8 @@
 package com.probablyadoor.cataclysms.item.custom;
 
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
+import mod.chloeprime.aaaparticles.api.common.AAALevel;
+import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -12,28 +14,20 @@ import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class DaybreakerItem extends SwordItem {
     public DaybreakerItem(ToolMaterial material, Settings settings) {
         super(material, settings);
     }
+    private static final ParticleEmitterInfo DAYBREAKFLARE = new ParticleEmitterInfo(Identifier.of("cataclysms", "daybreakflare")).scale(0.35F, 0.35F, 0.35F);
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
         if (!world.isClient && world instanceof ServerWorld serverWorld) {
-                serverWorld.spawnParticles(
-                        (ParticleEffect) ParticleTypes.FLAME,
-                        target.getX(),
-                        target.getY() + 1.0,
-                        target.getZ(),
-                        25,
-                        0.3,
-                        0.5,
-                        0.3,
-                        0.0
-                );
+            AAALevel.addParticle(serverWorld, false, DAYBREAKFLARE.clone().position(target.getX(), target.getY(), target.getZ()));
             world.playSound(
                     null,
                     attacker.getX(),
