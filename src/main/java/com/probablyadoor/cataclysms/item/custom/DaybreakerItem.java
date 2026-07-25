@@ -8,6 +8,9 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
+import net.minecraft.particle.ParticleEffect;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.world.World;
 
@@ -19,7 +22,18 @@ public class DaybreakerItem extends SwordItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
-        if (!world.isClient) {
+        if (!world.isClient && world instanceof ServerWorld serverWorld) {
+                serverWorld.spawnParticles(
+                        (ParticleEffect) ParticleTypes.FLAME,
+                        target.getX(),
+                        target.getY() + 1.0,
+                        target.getZ(),
+                        25,
+                        0.3,
+                        0.5,
+                        0.3,
+                        0.0
+                );
             world.playSound(
                     null,
                     attacker.getX(),
@@ -29,7 +43,7 @@ public class DaybreakerItem extends SwordItem {
                     SoundCategory.NEUTRAL,
                     0.5F,
                     1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
-            world.createExplosion(attacker, target.getX(), target.getY(), target.getZ(), 2, World.ExplosionSourceType.MOB);
+            target.setFireTicks(500);
 
 
         }

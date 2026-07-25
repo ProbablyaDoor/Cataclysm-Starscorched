@@ -37,7 +37,7 @@ public class AttackMixin {
                 target.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 150, 0, false, false));
                 BlockPos pos = BlockPos.ofFloored(target.getX(), target.getY(), target.getZ());
                 BlockPos pos2 = BlockPos.ofFloored(target.getX(), target.getY() + 1, target.getZ());
-                BlockState state = Blocks.PACKED_ICE.getDefaultState();
+                BlockState state = Blocks.FROSTED_ICE.getDefaultState();
                 if (world.getBlockState(pos) == Blocks.AIR.getDefaultState())
                     world.setBlockState(pos, state);
                 if (world.getBlockState(pos2) == Blocks.AIR.getDefaultState())
