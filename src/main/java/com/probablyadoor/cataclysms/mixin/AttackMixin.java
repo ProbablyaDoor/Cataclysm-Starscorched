@@ -28,14 +28,14 @@ public class AttackMixin {
 
     @Unique
     private void frostfallCrit(LivingEntity target) {
-        final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostcube")).scale(target.getWidth()*0.525F, target.getHeight()*0.3F, target.getWidth()*0.525F);
+        final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostcube")).scale(target.getWidth()*0.55F, target.getHeight()*0.3F, target.getWidth()*0.55F);
         PlayerEntity player = (PlayerEntity) (Object) this;
         World world = target.getWorld();
         float cooldown = player.getAttackCooldownProgress(0.5F);
         boolean charged = cooldown > 0.9F;
         if (isCritical(player, charged)) {
             if (player.isHolding(ModItems.FROSTFALL)) {
-                target.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 150, 0, false, false));
+                target.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 240, 0, false, false));
                 if (!world.isClient) {
                     AAALevel.addParticle(world, false, FROSTRING.clone().position(target.getX(), target.getY(), target.getZ()));
 
