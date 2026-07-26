@@ -45,8 +45,9 @@ Then, add the dependencies of the mod
 **For Mac, .minecraft is at ~/Library/Application Support/minecraft**
 
 ## AI DISCLOSURE:
-Almost no AI was used in the making of the project. However, it was used for fixing a certain bug involving one of the weapons that nearly broke
-the entire mod.
+Almost no AI was used in the making of the project. The only use of it to help me understand how a Mixin file works, alongside the 
+fabric documentation and tutorials so that I could get one of the weapons to actually render properly instead of crashing the entire game. In
+no way did it generate art, code or other parts of the project.
 
 
 ## OTHER INFO:
