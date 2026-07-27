@@ -31,7 +31,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HammerItem extends MiningToolItem {
-    private static final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostring")).scale(0.35F, 0.35F, 0.35F);
+    private static final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "iceimpact")).scale(0.45F, 0.45F, 0.45F);
+    private static final ParticleEmitterInfo FROSTCUBE = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostcube")).scale(0.5F, 0.75F, 0.5F);
+
 
     public HammerItem(ToolMaterial material, Settings settings) {
         super(material, BlockTags.PICKAXE_MINEABLE, settings);
@@ -94,8 +96,9 @@ public class HammerItem extends MiningToolItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
+        float yawRadians = (float) Math.toRadians(attacker.getYaw());
         if (!world.isClient && world instanceof ServerWorld serverWorld) {
-            AAALevel.addParticle(serverWorld, false, FROSTRING.clone().position(target.getX(), target.getY(), target.getZ()));
+            AAALevel.addParticle(serverWorld, false, FROSTRING.clone().position(target.getX(), target.getY()+1, target.getZ()).rotation(0.0F, yawRadians*-1, 0.0F));
             world.playSound(
                     null,
                     attacker.getX(),
@@ -130,6 +133,9 @@ public class HammerItem extends MiningToolItem {
                 user.getItemCooldownManager().set(this, 25);
             } else {
                 user.getItemCooldownManager().set(this, 50);
+                if (world instanceof ServerWorld serverWorld) {
+                    AAALevel.addParticle(serverWorld, false, FROSTCUBE.clone().position(user.getX(), user.getY(), user.getZ()));
+                }
                 user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
 
             }

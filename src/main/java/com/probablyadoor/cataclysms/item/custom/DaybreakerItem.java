@@ -21,13 +21,16 @@ public class DaybreakerItem extends SwordItem {
     public DaybreakerItem(ToolMaterial material, Settings settings) {
         super(material, settings);
     }
-    private static final ParticleEmitterInfo DAYBREAKFLARE = new ParticleEmitterInfo(Identifier.of("cataclysms", "daybreakflare")).scale(0.35F, 0.35F, 0.35F);
+    private static final ParticleEmitterInfo SUNSLASH = new ParticleEmitterInfo(Identifier.of("cataclysms", "sunslash")).scale(0.35F, 0.35F, 0.35F);
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
+
+        // The particle effect maker can only detect yaw and pitch in radians for some reason
+        float yawRadians = (float) Math.toRadians(attacker.getYaw());
         if (!world.isClient && world instanceof ServerWorld serverWorld) {
-            AAALevel.addParticle(serverWorld, false, DAYBREAKFLARE.clone().position(target.getX(), target.getY(), target.getZ()));
+            AAALevel.addParticle(serverWorld, false, SUNSLASH.clone().position(target.getX(), target.getY(), target.getZ()).rotation(0.0F, yawRadians*-1, 0.0F));
             world.playSound(
                     null,
                     attacker.getX(),

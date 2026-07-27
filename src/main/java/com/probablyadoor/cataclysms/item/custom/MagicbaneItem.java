@@ -27,7 +27,7 @@ public class MagicbaneItem extends SwordItem {
         super(material, settings);
     }
 
-    private static final ParticleEmitterInfo VOIDSLASH = new ParticleEmitterInfo(Identifier.of("cataclysms", "voidslash"));
+    private static final ParticleEmitterInfo MAGICSLASH = new ParticleEmitterInfo(Identifier.of("cataclysms", "magicslash")).scale(0.35F, 0.35F, 0.35F);
 
     @Override
     public void inventoryTick(ItemStack stack, World world, Entity entity, int slot, boolean selected) {
@@ -46,7 +46,7 @@ public class MagicbaneItem extends SwordItem {
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
         if (!world.isClient && world instanceof ServerWorld serverWorld) {
-            AAALevel.addParticle(serverWorld, false, VOIDSLASH.clone().position(target.getX(), target.getY()+1.5d, target.getZ()));
+            AAALevel.addParticle(serverWorld, false, MAGICSLASH.clone().position(target.getX(), target.getY()+1.5d, target.getZ()).rotation(attacker.getPitch(), attacker.getYaw(), 0.0F));
             world.playSound(
                     null,
                     attacker.getX(),
