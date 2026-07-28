@@ -6,6 +6,8 @@ import net.minecraft.block.*;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ItemActionResult;
 import net.minecraft.util.ItemScatterer;
@@ -40,7 +42,7 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
     @Nullable
     @Override
     public BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return new PedestalBlockEntity(pos, state);
     }
 
     @Override
@@ -69,6 +71,36 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
     // Runs when a player right-clicks an item on the pedestal
     @Override
     protected ItemActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-        return super.onUseWithItem(stack, state, world, pos, player, hand, hit);
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+
+        // Safety check if block entity matches with pedestal entity
+        if (blockEntity instanceof PedestalBlockEntity pedestalBlockEntity) {
+            boolean hasItemInHand = !stack.isEmpty();
+            boolean pedestalIsEmpty = pedestalBlockEntity.isEmpty();
+
+            // Places item on pedestal
+            if (pedestalIsEmpty && hasItemInHand) {
+                pedestalBlockEntity.setStack(0, stack.copyWithCount(1));
+                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 2f);
+                stack.decrement(1);
+
+                // Save changes, update clients
+                pedestalBlockEntity.markDirty();
+                world.updateListeners(pos, state, state, 0);
+
+            // Take back item on pedestal
+            } else if (!hasItemInHand && !player.isSneaking()) {
+                ItemStack stackOnPedestal = pedestalBlockEntity.getStack(0);
+                player.setStackInHand(Hand.MAIN_HAND, stackOnPedestal);
+                world.playSound(player, pos, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.BLOCKS, 1f, 2f);
+                pedestalBlockEntity.clear(); // Removes ALL items stored in the pedestal
+
+                // Save changes, update clients
+                pedestalBlockEntity.markDirty();
+                world.updateListeners(pos, state, state, 0);
+            }
+        }
+
+        return ItemActionResult.SUCCESS;
     }
 }

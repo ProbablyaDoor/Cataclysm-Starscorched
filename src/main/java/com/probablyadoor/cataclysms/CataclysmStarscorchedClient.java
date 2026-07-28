@@ -1,5 +1,7 @@
 package com.probablyadoor.cataclysms;
 
+import com.probablyadoor.cataclysms.block.entity.ModBlockEntities;
+import com.probablyadoor.cataclysms.block.entity.renderer.PedestalBlockEntityRenderer;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.entity.client.FrostfallProjectileModel;
 import com.probablyadoor.cataclysms.entity.client.FrostfallProjectileRenderer;
@@ -13,6 +15,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
+import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.Item;
@@ -36,6 +39,8 @@ public class CataclysmStarscorchedClient implements ClientModInitializer {
 
         registerRangedWeaponPredicates(ModItems.NIGHTVEIL);
         //System.out.println(ModItems.NIGHTVEIL instanceof CrossbowItem);
+
+        BlockEntityRendererFactories.register(ModBlockEntities.PEDESTAL_BE, PedestalBlockEntityRenderer::new);
     }
     public static void registerRangedWeaponPredicates(Item item) {
         ModelPredicateProviderRegistry.register(item, Identifier.of("pull"), (itemStack, clientWorld, livingEntity, seed) -> {
