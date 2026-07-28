@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms;
 
 import com.probablyadoor.cataclysms.block.ModBlocks;
+import com.probablyadoor.cataclysms.block.entity.ModBlockEntities;
 import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.ModEntities;
@@ -37,6 +38,8 @@ public class CataclysmStarscorched implements ModInitializer {
 
 		ModEntities.registerModEntities();
 		FabricDefaultAttributeRegistry.register(ModEntities.ICE_CRYSTAL, IceCrystalEntity.createAttributes());
+
+        ModBlockEntities.registerBlockEntities();
 	}
 
 	public static Identifier id(String path) {

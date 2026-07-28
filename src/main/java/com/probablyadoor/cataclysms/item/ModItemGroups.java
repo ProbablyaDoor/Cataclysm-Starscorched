@@ -27,6 +27,7 @@ public class ModItemGroups {
                     .displayName(Text.translatable("itemgroup.cataclysms.cataclysm_blocks"))
                     .entries((displayContext, entries) -> {
                         entries.add(ModBlocks.STARSCORCHED_SLATE);
+                        entries.add(ModBlocks.PEDESTAL);
                     }).build());
 
     public static final ItemGroup CATACLYSM_WEAPONS = Registry.register(Registries.ITEM_GROUP,
