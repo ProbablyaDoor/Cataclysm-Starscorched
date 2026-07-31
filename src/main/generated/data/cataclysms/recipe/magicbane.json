@@ -3,16 +3,19 @@
   "category": "misc",
   "key": {
     "O": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:breeze_rod"
     },
     "R": {
-      "item": "minecraft:gold_block"
+      "item": "minecraft:gold_ingot"
+    },
+    "T": {
+      "item": "minecraft:netherite_ingot"
     }
   },
   "pattern": [
-    " R ",
-    " R ",
-    " O "
+    "  R",
+    "TR ",
+    "OT "
   ],
   "result": {
     "count": 1,

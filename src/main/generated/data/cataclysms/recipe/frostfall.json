@@ -7,10 +7,13 @@
     },
     "R": {
       "item": "minecraft:blue_ice"
+    },
+    "T": {
+      "item": "minecraft:netherite_ingot"
     }
   },
   "pattern": [
-    "RRR",
+    "RTR",
     " O ",
     " O "
   ],
