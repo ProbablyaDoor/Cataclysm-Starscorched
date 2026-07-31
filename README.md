@@ -1,7 +1,7 @@
 # Cataclysm-Starscorched
 
 
-
+<img width="1105" height="883" alt="cataclysm_test_logo" src="https://github.com/user-attachments/assets/98acfe5e-87cb-4919-95ae-87dd2099c68b" />
 Cataclysm: Starscorched or just Cataclysm is my first ever attempt at making a Minecraft mod. It adds a new weapon progression into the game with
 custom attacks, systems and detailed models. It also adds custom blocks, items, mobs and minibosses to the game, which are vital in the process of
 making each weapon. Lastly, every weapon will be made with a new crafting system, based on a "multiblock," a structure made from a large chunk of
