@@ -33,7 +33,7 @@ public class PedestalBlockEntityRenderer implements BlockEntityRenderer<Pedestal
 
         // Rotation Transformations
         matrices.translate(0.5f, 1.15f, 0.5f);
-        matrices.scale(0.5f, 0.5f, 0.5f);
+        matrices.scale(1f, 1f, 1f);
         matrices.multiply(
                 // Rotates around the Y axis
                 RotationAxis.POSITIVE_Y.rotationDegrees(
