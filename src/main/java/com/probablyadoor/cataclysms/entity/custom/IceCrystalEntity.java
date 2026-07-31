@@ -33,7 +33,9 @@ public class IceCrystalEntity extends PathAwareEntity {
         //Lifetime
         lifeTime--;
         if(lifeTime == 0){
-            world.createExplosion(this, this.getX(), this.getY(), this.getZ(), 2, World.ExplosionSourceType.MOB);
+            if (this.getWorld() instanceof ServerWorld serverWorld) {
+                serverWorld.createExplosion(this, this.getX(), this.getY(), this.getZ(), 2, World.ExplosionSourceType.MOB);
+            }
             this.discard();
 
         }
@@ -74,8 +76,7 @@ public class IceCrystalEntity extends PathAwareEntity {
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.0f)
                 .add(EntityAttributes.GENERIC_EXPLOSION_KNOCKBACK_RESISTANCE, 1.0f)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0f)
-                .add(EntityAttributes.GENERIC_GRAVITY, 0.0f);
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 1.0f);
     }
     @Override
     public boolean isInvulnerableTo(DamageSource source) {
