@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_starmetal_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": "cataclysms:starmetal_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "cataclysms:magicbane"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_starmetal_ingot"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "cataclysms:magicbane"
+    ]
+  }
+}

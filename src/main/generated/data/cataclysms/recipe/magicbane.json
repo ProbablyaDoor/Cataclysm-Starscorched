@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "item": "minecraft:netherite_ingot"
+    },
+    "R": {
+      "item": "minecraft:gold_block"
+    }
+  },
+  "pattern": [
+    " R ",
+    " R ",
+    " O "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cataclysms:magicbane"
+  }
+}

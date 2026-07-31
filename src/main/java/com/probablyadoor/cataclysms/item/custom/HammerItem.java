@@ -1,5 +1,6 @@
 package com.probablyadoor.cataclysms.item.custom;
 
+import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import mod.chloeprime.aaaparticles.api.common.AAALevel;
@@ -21,6 +22,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -111,37 +113,59 @@ public class HammerItem extends MiningToolItem {
         }
         return true;
     }
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack itemStack = user.getStackInHand(hand);
 
-        if (!world.isClient) {
-            if (!user.isSneaking()) {
-                world.playSound(
-                        null,
-                        user.getX(),
-                        user.getY(),
-                        user.getZ(),
-                        SoundRegistry.ITEM_FROSTFALL_THROW,
-                        SoundCategory.NEUTRAL,
-                        0.5F,
-                        0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
-                );
-                FrostfallProjectileEntity frostfall = new FrostfallProjectileEntity(world, user);
-                frostfall.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
-                world.spawnEntity(frostfall);
-                frostfall.owner = user;
-                user.getItemCooldownManager().set(this, 25);
-            } else {
-                user.getItemCooldownManager().set(this, 50);
-                if (world instanceof ServerWorld serverWorld) {
-                    AAALevel.addParticle(serverWorld, false, FROSTCUBE.clone().position(user.getX(), user.getY(), user.getZ()));
+    @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.SPEAR;
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.setCurrentHand(hand);
+        return TypedActionResult.consume(user.getStackInHand(hand));
+    }
+
+    @Override
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+        return 72000;
+    }
+
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int ticksUsed) {
+        if (user instanceof PlayerEntity playerEntity) {
+            int chargeTicks = this.getMaxUseTime(stack, user) - ticksUsed;
+            if (chargeTicks >= 10) {
+                if (!world.isClient) {
+                    if (!user.isSneaking()) {
+                        world.playSound(
+                                null,
+                                user.getX(),
+                                user.getY(),
+                                user.getZ(),
+                                SoundRegistry.ITEM_FROSTFALL_THROW,
+                                SoundCategory.NEUTRAL,
+                                0.5F,
+                                0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
+                        );
+                        FrostfallProjectileEntity frostfall = new FrostfallProjectileEntity(world, playerEntity);
+                        frostfall.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
+                        world.spawnEntity(frostfall);
+                        frostfall.owner = playerEntity;
+                        playerEntity.getItemCooldownManager().set(this, 50);
+                    } else {
+                        playerEntity.getItemCooldownManager().set(this, 250);
+                        if (world instanceof ServerWorld serverWorld) {
+                            AAALevel.addParticle(serverWorld, false, FROSTCUBE.clone().position(user.getX(), user.getY(), user.getZ()));
+                        }
+                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 240, 2, false, false));
+                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 240, 4, false, false));
+                        user.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 240, 99, false, false));
+
+
+                    }
                 }
-                user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 60, 2, false, false));
 
             }
-
         }
-        return TypedActionResult.success(itemStack, world.isClient());
 
     }
 }

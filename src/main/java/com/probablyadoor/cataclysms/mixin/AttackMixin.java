@@ -33,12 +33,14 @@ public class AttackMixin {
         World world = target.getWorld();
         float cooldown = player.getAttackCooldownProgress(0.5F);
         boolean charged = cooldown > 0.9F;
+        int proc_chance = 10;
         if (isCritical(player, charged)) {
             if (player.isHolding(ModItems.FROSTFALL)) {
-                target.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 240, 0, false, false));
-                if (!world.isClient) {
-                    AAALevel.addParticle(world, false, FROSTRING.clone().position(target.getX(), target.getY(), target.getZ()));
-
+                if (player.getRandom().nextInt(100) <= proc_chance) {
+                    target.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 240, 0, false, false));
+                    if (!world.isClient) {
+                        AAALevel.addParticle(world, false, FROSTRING.clone().position(target.getX(), target.getY(), target.getZ()));
+                    }
                 }
             }
         }

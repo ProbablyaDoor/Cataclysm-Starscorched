@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "item": "minecraft:bone"
+    },
+    "R": {
+      "item": "minecraft:blue_ice"
+    }
+  },
+  "pattern": [
+    "RRR",
+    " O ",
+    " O "
+  ],
+  "result": {
+    "count": 1,
+    "id": "cataclysms:frostfall"
+  }
+}
