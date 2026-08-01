@@ -49,6 +49,9 @@ Almost no AI was used in the making of the project. The only use of it to help m
 fabric documentation and tutorials so that I could get one of the weapons to actually render properly instead of crashing the entire game. In
 no way did it generate art, code or other parts of the project.
 
+## CREDITS
+SyntaxBrew (Co-Developer),
+zhang-shuning (Main tester)
 
 ## OTHER INFO:
 Weapons and mobs are inspired by other mods such as: [Celestisynth](https://www.curseforge.com/minecraft/mc-mods/celestisynth),
