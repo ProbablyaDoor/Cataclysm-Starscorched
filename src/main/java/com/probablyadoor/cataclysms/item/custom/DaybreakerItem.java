@@ -57,6 +57,7 @@ public class DaybreakerItem extends SwordItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        user.getItemCooldownManager().set(this, 75);
         ItemStack itemStack = user.getStackInHand(hand);
         int radius = 5;
         int kbstrength = 5;
@@ -83,7 +84,6 @@ public class DaybreakerItem extends SwordItem {
                     }
                 }
             }
-            user.getItemCooldownManager().set(this, 75);
         }
         return TypedActionResult.success(itemStack, world.isClient());
 
