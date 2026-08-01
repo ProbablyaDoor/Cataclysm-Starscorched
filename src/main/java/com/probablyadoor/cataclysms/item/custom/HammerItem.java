@@ -1,6 +1,5 @@
 package com.probablyadoor.cataclysms.item.custom;
 
-import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import mod.chloeprime.aaaparticles.api.common.AAALevel;
@@ -33,9 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HammerItem extends MiningToolItem {
-    private static final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "iceimpact")).scale(0.45F, 0.45F, 0.45F);
-    private static final ParticleEmitterInfo FROSTCUBE = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostcube")).scale(0.5F, 0.75F, 0.5F);
-
+    private static final ParticleEmitterInfo FROSTAURA = new ParticleEmitterInfo(Identifier.of("cataclysms", "frostaura")).scale(0.45F, 0.45F, 0.45F);
 
     public HammerItem(ToolMaterial material, Settings settings) {
         super(material, BlockTags.PICKAXE_MINEABLE, settings);
@@ -98,9 +95,7 @@ public class HammerItem extends MiningToolItem {
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
         World world = target.getWorld();
-        float yawRadians = (float) Math.toRadians(attacker.getYaw());
         if (!world.isClient && world instanceof ServerWorld serverWorld) {
-            AAALevel.addParticle(serverWorld, false, FROSTRING.clone().position(target.getX(), target.getY()+1, target.getZ()).rotation(0.0F, yawRadians*-1, 0.0F));
             world.playSound(
                     null,
                     attacker.getX(),
@@ -121,6 +116,7 @@ public class HammerItem extends MiningToolItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+
         user.setCurrentHand(hand);
         return TypedActionResult.consume(user.getStackInHand(hand));
     }
@@ -130,12 +126,19 @@ public class HammerItem extends MiningToolItem {
         return 72000;
     }
 
+    @Override
+    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
+        if (!world.isClient && world instanceof ServerWorld serverWorld) {
+            AAALevel.addParticle(serverWorld, false, FROSTAURA.clone().position(user.getX(), user.getY()+0.1, user.getZ()));
+        }
+    }
+
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int ticksUsed) {
         if (user instanceof PlayerEntity playerEntity) {
             int chargeTicks = this.getMaxUseTime(stack, user) - ticksUsed;
+
             if (chargeTicks >= 10) {
                 if (!world.isClient) {
-                    if (!user.isSneaking()) {
                         world.playSound(
                                 null,
                                 user.getX(),
@@ -151,21 +154,8 @@ public class HammerItem extends MiningToolItem {
                         world.spawnEntity(frostfall);
                         frostfall.owner = playerEntity;
                         playerEntity.getItemCooldownManager().set(this, 50);
-                    } else {
-                        playerEntity.getItemCooldownManager().set(this, 250);
-                        if (world instanceof ServerWorld serverWorld) {
-                            AAALevel.addParticle(serverWorld, false, FROSTCUBE.clone().position(user.getX(), user.getY(), user.getZ()));
-                        }
-                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 240, 2, false, false));
-                        user.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 240, 4, false, false));
-                        user.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 240, 99, false, false));
-
-
-                    }
                 }
-
             }
         }
-
     }
 }

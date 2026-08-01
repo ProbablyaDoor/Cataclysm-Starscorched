@@ -9,6 +9,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -21,8 +22,34 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class AttackMixin {
     @Inject(method = "attack(Lnet/minecraft/entity/Entity;)V", at = @At("HEAD"))
     private void onEntityAttack(Entity target, CallbackInfo callbackInfo) {
+        PlayerEntity user = (PlayerEntity) (Object) this;
+        this.customSlashParticle(user);
         if (target instanceof LivingEntity livingEntity) {
             frostfallCrit(livingEntity);
+        }
+    }
+
+    @Unique
+    private void customSlashParticle(PlayerEntity user) {
+        final ParticleEmitterInfo MAGICSLASH = new ParticleEmitterInfo(Identifier.of("cataclysms", "magicslash")).scale(0.25F, 0.25F, 0.25F);
+        final ParticleEmitterInfo FROSTRING = new ParticleEmitterInfo(Identifier.of("cataclysms", "iceslam")).scale(0.25F, 0.25F, 0.25F);
+        final ParticleEmitterInfo SUNSLASH = new ParticleEmitterInfo(Identifier.of("cataclysms", "sunslash")).scale(0.25F, 0.25F, 0.25F);
+
+        World world = user.getWorld();
+        float yawRadians = (float) Math.toRadians(user.getYaw());
+        float attackCooldown = user.getAttackCooldownProgress(0.5f);
+
+        if (attackCooldown >= 1.0f && world instanceof ServerWorld serverWorld) {
+            if (user.isHolding(ModItems.FROSTFALL)) {
+                AAALevel.addParticle(serverWorld, false, FROSTRING.clone().position(user.getX(), user.getY()+0.5, user.getZ()).rotation(0.0F, yawRadians*-1, 0.0F));
+            }
+            if (user.isHolding(ModItems.MAGICBANE)) {
+                AAALevel.addParticle(serverWorld, false, MAGICSLASH.clone().position(user.getX(), user.getY()+0.65, user.getZ()).rotation(0.0F, yawRadians*-1, 0.0F));
+            }
+            if (user.isHolding(ModItems.DAYBREAKER)) {
+                AAALevel.addParticle(serverWorld, false, SUNSLASH.clone().position(user.getX(), user.getY()+1, user.getZ()).rotation(0.0F, yawRadians*-1, 0.0F));
+            }
+
         }
     }
 
