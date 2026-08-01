@@ -50,7 +50,7 @@ fabric documentation and tutorials so that I could get one of the weapons to act
 no way did it generate art, code or other parts of the project.
 
 ## CREDITS
-SyntaxBrew (Co-Developer)
+SyntaxBrew (Co-Developer),
 zhang-shuning (Main tester)
 
 ## OTHER INFO:
