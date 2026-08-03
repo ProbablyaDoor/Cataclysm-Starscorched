@@ -1,8 +1,6 @@
 package com.probablyadoor.cataclysms.item.custom;
 
-import com.probablyadoor.cataclysms.entity.custom.IceCrystalEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
-import com.probablyadoor.cataclysms.util.FriendlyFireCheck;
 import mod.chloeprime.aaaparticles.api.common.AAALevel;
 import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.entity.Entity;
