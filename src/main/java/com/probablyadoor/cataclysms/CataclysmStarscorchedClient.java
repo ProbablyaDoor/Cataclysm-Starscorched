@@ -1,10 +1,7 @@
 package com.probablyadoor.cataclysms;
 
 import com.probablyadoor.cataclysms.entity.ModEntities;
-import com.probablyadoor.cataclysms.entity.client.FrostfallProjectileModel;
-import com.probablyadoor.cataclysms.entity.client.FrostfallProjectileRenderer;
-import com.probablyadoor.cataclysms.entity.client.IceCrystalModel;
-import com.probablyadoor.cataclysms.entity.client.IceCrystalRenderer;
+import com.probablyadoor.cataclysms.entity.client.*;
 import com.probablyadoor.cataclysms.item.ModItems;
 import com.probablyadoor.cataclysms.item.custom.NightveilItem;
 import com.probablyadoor.cataclysms.keybind.ModKeyBinds;
@@ -33,6 +30,9 @@ public class CataclysmStarscorchedClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(IceCrystalModel.ICE_CRYSTAL, IceCrystalModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ICE_CRYSTAL, IceCrystalRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(MagicbaneSwordModel.MAGICBANE_SWORD, MagicbaneSwordModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MAGICBANE_SWORD, MagicbaneSwordRenderer::new);
 
         registerRangedWeaponPredicates(ModItems.NIGHTVEIL);
         //System.out.println(ModItems.NIGHTVEIL instanceof CrossbowItem);

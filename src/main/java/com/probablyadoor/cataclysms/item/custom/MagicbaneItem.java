@@ -1,8 +1,10 @@
 package com.probablyadoor.cataclysms.item.custom;
 
+import com.probablyadoor.cataclysms.entity.ModEntities;
+import com.probablyadoor.cataclysms.entity.client.MagicbaneSwordModel;
+import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
+import com.probablyadoor.cataclysms.entity.custom.MagicbaneSwordEntity;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
-import mod.chloeprime.aaaparticles.api.common.AAALevel;
-import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.entity.Entity;
@@ -10,13 +12,15 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 
@@ -57,6 +61,21 @@ public class MagicbaneItem extends SwordItem {
                     1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
         }
         return true;
+    }
+
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
+
+        if (!world.isClient) {
+            MagicbaneSwordEntity magicbaneSwordEntity = new MagicbaneSwordEntity(world, user);
+            magicbaneSwordEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
+            world.spawnEntity(magicbaneSwordEntity);
+            magicbaneSwordEntity.setOwner(user);
+            user.getItemCooldownManager().set(this, 20);
+
+        }
+        return TypedActionResult.success(itemStack, world.isClient());
     }
 
 

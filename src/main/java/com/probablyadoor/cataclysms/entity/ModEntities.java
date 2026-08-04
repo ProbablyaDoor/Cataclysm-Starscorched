@@ -3,6 +3,7 @@ package com.probablyadoor.cataclysms.entity;
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
 import com.probablyadoor.cataclysms.entity.custom.FrostfallProjectileEntity;
 import com.probablyadoor.cataclysms.entity.custom.IceCrystalEntity;
+import com.probablyadoor.cataclysms.entity.custom.MagicbaneSwordEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
@@ -19,6 +20,11 @@ public class ModEntities {
             Identifier.of(CataclysmStarscorched.MOD_ID, "ice_crystal"),
             EntityType.Builder.<IceCrystalEntity>create(IceCrystalEntity::new, SpawnGroup.MISC)
                     .dimensions(1.25f, 2f).build());
+
+    public static final EntityType<MagicbaneSwordEntity> MAGICBANE_SWORD = Registry.register(Registries.ENTITY_TYPE,
+            Identifier.of(CataclysmStarscorched.MOD_ID, "magicbane_sword"),
+            EntityType.Builder.<MagicbaneSwordEntity>create(MagicbaneSwordEntity::new, SpawnGroup.MISC)
+            .dimensions(0.75f, 1.2f).build());
 
 
     public static void registerModEntities() {
