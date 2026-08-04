@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms.mixin;
 
 import com.probablyadoor.cataclysms.effect.ModEffects;
+import com.probablyadoor.cataclysms.entity.custom.MagicbaneSwordEntity;
 import com.probablyadoor.cataclysms.item.ModItems;
 import mod.chloeprime.aaaparticles.api.common.AAALevel;
 import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
@@ -67,6 +68,16 @@ public class AttackMixin {
                     target.addStatusEffect(new StatusEffectInstance(ModEffects.ICED, 240, 0, false, false));
                     if (!world.isClient) {
                         AAALevel.addParticle(world, false, FROSTRING.clone().position(target.getX(), target.getY(), target.getZ()));
+                    }
+                }
+            }
+            if (player.isHolding(ModItems.MAGICBANE)) {
+                if (player.getRandom().nextInt(30) <= proc_chance) {
+                    if (!world.isClient) {
+                        MagicbaneSwordEntity magicbaneSwordEntity = new MagicbaneSwordEntity(world, player);
+                        magicbaneSwordEntity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0f, 1.5f, 0f);
+                        world.spawnEntity(magicbaneSwordEntity);
+                        magicbaneSwordEntity.setOwner(player);
                     }
                 }
             }

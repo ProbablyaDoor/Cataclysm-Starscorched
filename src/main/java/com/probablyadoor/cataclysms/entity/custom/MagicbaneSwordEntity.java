@@ -3,19 +3,27 @@ package com.probablyadoor.cataclysms.entity.custom;
 import com.probablyadoor.cataclysms.entity.ModEntities;
 import com.probablyadoor.cataclysms.item.ModItems;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
+import mod.chloeprime.aaaparticles.api.common.AAALevel;
+import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
@@ -23,6 +31,9 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
     private float rotation;
     public Vector2f groundedOffset = new Vector2f(0.0f, 0.0f);
     public int lifeTime = 250;
+    public int cooldown = 0;
+    private static final ParticleEmitterInfo MAGICORB = new ParticleEmitterInfo(Identifier.of("cataclysms", "magicorb")).scale(0.25F, 0.25F, 0.25F);
+
 
     public MagicbaneSwordEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -53,9 +64,25 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
     public void tick() {
         World world = this.getWorld();
         Entity owner = getOwner();
+        if (cooldown > 0) {
+            cooldown--;
+        }
+
         lifeTime--;
-        if(lifeTime == 0){
-                this.discard();
+        if(lifeTime == 0 && world instanceof ServerWorld serverWorld){
+            AAALevel.addParticle(serverWorld, false, MAGICORB.clone().position(this.getX(), this.getY()+0.1, this.getZ()));
+            world.playSound(
+                    null,
+                    this.getX(),
+                    this.getY(),
+                    this.getZ(),
+                    SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK,
+                    SoundCategory.NEUTRAL,
+                    1.5F,
+                    1F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
+            );
+            this.discard();
+            return;
             }
 
         super.tick();
@@ -72,16 +99,31 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
         }
         final Vec3d center = owner.getPos().add(0.0, owner.getHeight() * 0.33, 0.0);
 
-        final float radius = 1f;
-        final float velocity = 25f;
+        final float radius = 1.5f;
+        final float velocity = 0.35f;
         final double angle = this.age * velocity;
 
         final double spinx = center.x + (Math.cos(angle) * radius);
-        final double spiny = center.y + 1;
+        final double spiny = center.y + 0.35;
         final double spinz = center.z + (Math.sin(angle) * radius);
         this.setPosition(spinx, spiny, spinz);
         this.setVelocity(Vec3d.ZERO);
         this.velocityDirty = true;
+
+        Box box = new Box(this.getX() + radius, this.getY() + radius, this.getZ() + radius,
+                this.getX() - radius, this.getY() - radius, this.getZ() - radius);
+        for (Entity entities : world.getOtherEntities(this, box, EntityPredicates.VALID_LIVING_ENTITY)) {
+            if ((entities instanceof LivingEntity livingEntity) && livingEntity != owner && livingEntity.isAlive()) {
+                if (livingEntity.getPos().add(0.0, livingEntity.getHeight() * 0.5, 0.0).squaredDistanceTo(this.getPos()) < radius * radius) {
+                    EntityHitResult entityHitResult = new EntityHitResult(livingEntity);
+                    if (cooldown <= 0) {
+                        this.onEntityHit(entityHitResult);
+                        cooldown += 10;
+                    }
+                    break;
+                }
+            }
+            }
     }
 
     @Override
@@ -100,8 +142,20 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
                     1.5F,
                     0.8F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
             );
-            if (!world.isClient) {
-                this.discard();
+            if (!world.isClient && world instanceof ServerWorld serverWorld) {
+                AAALevel.addParticle(serverWorld, false, MAGICORB.clone().position(this.getX(), this.getY()+0.1, this.getZ()));
+                livingEntity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 100, 1, false, true));
+                world.playSound(
+                        null,
+                        this.getX(),
+                        this.getY(),
+                        this.getZ(),
+                        SoundEvents.BLOCK_AMETHYST_BLOCK_BREAK,
+                        SoundCategory.NEUTRAL,
+                        1.5F,
+                        1F / (world.getRandom().nextFloat() * 0.8F + 1.6F)
+                );
+                lifeTime--;
             }
         }
         if (!this.getWorld().isClient()) {

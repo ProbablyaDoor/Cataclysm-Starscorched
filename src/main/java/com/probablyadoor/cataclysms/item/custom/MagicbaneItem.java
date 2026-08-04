@@ -64,22 +64,6 @@ public class MagicbaneItem extends SwordItem {
     }
 
     @Override
-    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        ItemStack itemStack = user.getStackInHand(hand);
-
-        if (!world.isClient) {
-            MagicbaneSwordEntity magicbaneSwordEntity = new MagicbaneSwordEntity(world, user);
-            magicbaneSwordEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 0f);
-            world.spawnEntity(magicbaneSwordEntity);
-            magicbaneSwordEntity.setOwner(user);
-            user.getItemCooldownManager().set(this, 20);
-
-        }
-        return TypedActionResult.success(itemStack, world.isClient());
-    }
-
-
-    @Override
     public float getBonusAttackDamage(Entity target, float baseAttackDamage, DamageSource damageSource) {
         if (damageSource.getAttacker() instanceof LivingEntity attacker) {
             ItemStack itemStack = attacker.getMainHandStack();

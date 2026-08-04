@@ -24,7 +24,7 @@ public class ModEntities {
     public static final EntityType<MagicbaneSwordEntity> MAGICBANE_SWORD = Registry.register(Registries.ENTITY_TYPE,
             Identifier.of(CataclysmStarscorched.MOD_ID, "magicbane_sword"),
             EntityType.Builder.<MagicbaneSwordEntity>create(MagicbaneSwordEntity::new, SpawnGroup.MISC)
-            .dimensions(0.75f, 1.2f).build());
+            .dimensions(1f, 1f).build());
 
 
     public static void registerModEntities() {
