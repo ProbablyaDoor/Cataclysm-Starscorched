@@ -69,7 +69,7 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
         }
 
         lifeTime--;
-        if(lifeTime == 0 && world instanceof ServerWorld serverWorld){
+        if(lifeTime <= 0 && world instanceof ServerWorld serverWorld){
             AAALevel.addParticle(serverWorld, false, MAGICORB.clone().position(this.getX(), this.getY()+0.1, this.getZ()));
             world.playSound(
                     null,
@@ -88,7 +88,7 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
         super.tick();
 
         if (this.getWorld() instanceof ServerWorld serverWorld) {
-            serverWorld.spawnParticles(ParticleTypes.ENCHANT,
+            serverWorld.spawnParticles(ParticleTypes.WITCH,
                     this.getX(), this.getY() + 1, this.getZ(), 1,
                     0, 0, 0, 0);
         }
@@ -118,7 +118,7 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
                     EntityHitResult entityHitResult = new EntityHitResult(livingEntity);
                     if (cooldown <= 0) {
                         this.onEntityHit(entityHitResult);
-                        cooldown += 10;
+                        cooldown += 20;
                     }
                     break;
                 }
@@ -129,7 +129,7 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity entity = entityHitResult.getEntity();
-        entity.damage(this.getDamageSources().thrown(this, this.getOwner()), 10);
+        entity.damage(this.getDamageSources().thrown(this, this.getOwner()), 2);
         if (entity instanceof LivingEntity livingEntity) {
             World world = livingEntity.getWorld();
             world.playSound(

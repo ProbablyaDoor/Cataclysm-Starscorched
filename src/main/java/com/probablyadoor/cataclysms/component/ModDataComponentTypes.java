@@ -14,6 +14,8 @@ public class ModDataComponentTypes {
             register("total_uses", builder -> builder.codec(Codec.INT).cache());
     public static final ComponentType<Integer> CURRENT_ENCHANTMENTS =
             register("current_enchantments", builder -> builder.codec(Codec.INT).cache());
+    public static final ComponentType<Integer> SOUL_COUNT =
+            register("soul_count", builder -> builder.codec(Codec.INT).cache());
 
     private static <T>ComponentType<T> register(String name, UnaryOperator<ComponentType.Builder<T>> builderOperator) {
         return Registry.register(Registries.DATA_COMPONENT_TYPE, Identifier.of(CataclysmStarscorched.MOD_ID, name),
