@@ -90,9 +90,14 @@ public class MagicbaneItem extends SwordItem {
                     0.5F,
                     1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
             WitherSkullEntity witherSkullEntity = new WitherSkullEntity(world, user, user.getPos());
-            witherSkullEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
+            witherSkullEntity.setOwner(user);
+            witherSkullEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3F, 1.0F);
             witherSkullEntity.setPos(user.getX(), user.getY()+1, user.getZ());
             world.spawnEntity(witherSkullEntity);
+            if (soulCount >= 5) {
+                witherSkullEntity.setCharged(true);
+                witherSkullEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 6F, 1.0F);
+            }
         }
         return TypedActionResult.success(itemStack, world.isClient());
 
