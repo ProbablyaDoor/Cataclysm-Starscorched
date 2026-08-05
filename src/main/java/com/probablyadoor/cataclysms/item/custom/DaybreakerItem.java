@@ -26,7 +26,7 @@ public class DaybreakerItem extends SwordItem {
     public DaybreakerItem(ToolMaterial material, Settings settings) {
         super(material, settings);
     }
-    private static final ParticleEmitterInfo SUNLEAPSTART = new ParticleEmitterInfo(Identifier.of("cataclysms", "sunleapstart")).scale(0.45F, 0.45F, 0.45F);
+    private static final ParticleEmitterInfo SUNLEAPSTART = new ParticleEmitterInfo(Identifier.of("cataclysms", "sunleapstart")).scale(0.75F, 0.75F, 0.75F);
 
     @Override
     public boolean postHit(ItemStack stack, LivingEntity target, LivingEntity attacker) {
@@ -55,9 +55,7 @@ public class DaybreakerItem extends SwordItem {
         user.getItemCooldownManager().set(this, 75);
         ItemStack itemStack = user.getStackInHand(hand);
         int radius = 5;
-        int kbstrength = 5;
-        Vec3d rotation = user.getRotationVector().multiply(1f);
-        user.addVelocity(rotation.getX(), 1.5, rotation.getZ());
+        int kbstrength = 10;
         if (!world.isClient && world instanceof ServerWorld serverWorld) {
             AAALevel.addParticle(serverWorld, false, SUNLEAPSTART.clone().position(user.getX(), user.getY()+0.1, user.getZ()));
             world.playSound(
@@ -74,7 +72,7 @@ public class DaybreakerItem extends SwordItem {
             for (Entity entities : world.getOtherEntities(user, box, EntityPredicates.VALID_LIVING_ENTITY)) {
                 if ((entities instanceof LivingEntity livingEntity) && livingEntity != user) {
                     if (livingEntity.getPos().add(0.0, livingEntity.getHeight() * 0.5, 0.0).squaredDistanceTo(user.getPos()) < radius * radius) {
-                        livingEntity.setVelocity((livingEntity.getX()-user.getX())/kbstrength, 0.5, (livingEntity.getZ()-user.getZ())/kbstrength);
+                        livingEntity.setVelocity((livingEntity.getX()-user.getX())/kbstrength, 1, (livingEntity.getZ()-user.getZ())/kbstrength);
                         livingEntity.setFireTicks(100);
                     }
                 }
