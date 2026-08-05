@@ -10,7 +10,6 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.WitherSkullEntity;
 import net.minecraft.item.*;
 import net.minecraft.item.tooltip.TooltipType;
@@ -21,7 +20,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
-import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.item.ItemStack;
 
@@ -71,36 +70,97 @@ public class MagicbaneItem extends SwordItem {
     }
 
     @Override
+    public UseAction getUseAction(ItemStack stack) {
+        return UseAction.BOW;
+    }
+
+    @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         int soulCount = itemStack.getOrDefault(ModDataComponentTypes.SOUL_COUNT, 0);
         if (soulCount <= 0) {
             return TypedActionResult.fail(itemStack);
+        } else {
+            user.setCurrentHand(hand);
+            return TypedActionResult.consume(user.getStackInHand(hand));
         }
-        if (!world.isClient && world instanceof ServerWorld serverWorld && soulCount > 0) {
-            user.getItemCooldownManager().set(this, 25);
-            itemStack.set(ModDataComponentTypes.SOUL_COUNT, soulCount - 1);
-            world.playSound(
-                    null,
-                    user.getX(),
-                    user.getY(),
-                    user.getZ(),
-                    SoundEvents.ENTITY_WITHER_SHOOT,
-                    SoundCategory.NEUTRAL,
-                    0.5F,
-                    1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
-            WitherSkullEntity witherSkullEntity = new WitherSkullEntity(world, user, user.getPos());
-            witherSkullEntity.setOwner(user);
-            witherSkullEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3F, 1.0F);
-            witherSkullEntity.setPos(user.getX(), user.getY()+1, user.getZ());
-            world.spawnEntity(witherSkullEntity);
-            if (soulCount >= 5) {
-                witherSkullEntity.setCharged(true);
-                witherSkullEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 6F, 1.0F);
+    }
+
+    @Override
+    public int getMaxUseTime(ItemStack stack, LivingEntity user) {
+        return 72000;
+    }
+
+    public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int ticksUsed) {
+        if (user instanceof PlayerEntity playerEntity) {
+            int chargeTicks = this.getMaxUseTime(stack, user) - ticksUsed;
+            int soulCount = stack.getOrDefault(ModDataComponentTypes.SOUL_COUNT, 0);
+
+            if (chargeTicks >= 70 && soulCount >= 10) {
+                if (!world.isClient && world instanceof ServerWorld serverWorld) {
+                    int i;
+                    world.playSound(
+                            null,
+                            user.getX(),
+                            user.getY(),
+                            user.getZ(),
+                            SoundEvents.ENTITY_WITHER_SPAWN,
+                            SoundCategory.NEUTRAL,
+                            1F,
+                            1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
+                }
+
+            } else if (chargeTicks >= 30 && soulCount >= 5) {
+                if (!world.isClient && world instanceof ServerWorld serverWorld) {
+                    int i;
+                    world.playSound(
+                            null,
+                            user.getX(),
+                            user.getY(),
+                            user.getZ(),
+                            SoundEvents.ENTITY_WITHER_SHOOT,
+                            SoundCategory.NEUTRAL,
+                            0.5F,
+                            1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
+
+                        WitherSkullEntity witherSkullEntity = new WitherSkullEntity(world, user, user.getPos());
+                        witherSkullEntity.setOwner(user);
+                        witherSkullEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 9F, 1.0F);
+                        witherSkullEntity.setPos(user.getX(), user.getY() + 1, user.getZ());
+                        world.spawnEntity(witherSkullEntity);
+                        witherSkullEntity.setCharged(true);
+                    for (i = 0; i < user.getRandom().nextInt(3) + 3; i++) {
+                        WitherSkullEntity witherSkullEntity2 = new WitherSkullEntity(world, user, user.getPos());
+                        witherSkullEntity2.setOwner(user);
+                        witherSkullEntity2.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 6F, 2.0F);
+                        witherSkullEntity2.setPos(user.getX(), user.getY() + 1, user.getZ());
+                        world.spawnEntity(witherSkullEntity2);
+                    }
+                        playerEntity.getItemCooldownManager().set(this, 100);
+                        playerEntity.getMainHandStack().set(ModDataComponentTypes.SOUL_COUNT, soulCount - 2);
+                }
+            } else if (chargeTicks >= 10 && soulCount >= 1) {
+                if (!world.isClient && world instanceof ServerWorld serverWorld) {
+                    world.playSound(
+                            null,
+                            user.getX(),
+                            user.getY(),
+                            user.getZ(),
+                            SoundEvents.ENTITY_WITHER_SHOOT,
+                            SoundCategory.NEUTRAL,
+                            0.5F,
+                            1.5F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
+                    WitherSkullEntity witherSkullEntity = new WitherSkullEntity(world, user, user.getPos());
+                    witherSkullEntity.setOwner(user);
+                    witherSkullEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0F, 3F, 1.0F);
+                    witherSkullEntity.setPos(user.getX(), user.getY() + 1, user.getZ());
+                    world.spawnEntity(witherSkullEntity);
+                    playerEntity.getItemCooldownManager().set(this, 50);
+                    playerEntity.getMainHandStack().set(ModDataComponentTypes.SOUL_COUNT, soulCount - 1);
+
+                }
             }
         }
-        return TypedActionResult.success(itemStack, world.isClient());
-
     }
 
     @Override

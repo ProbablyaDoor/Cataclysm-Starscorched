@@ -99,7 +99,7 @@ public class MagicbaneSwordEntity extends PersistentProjectileEntity {
         }
         final Vec3d center = owner.getPos().add(0.0, owner.getHeight() * 0.33, 0.0);
 
-        final float radius = 1.5f;
+        final float radius = 2f;
         final float velocity = 0.35f;
         final double angle = this.age * velocity;
 
