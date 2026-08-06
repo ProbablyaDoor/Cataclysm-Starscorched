@@ -1,5 +1,6 @@
 package com.probablyadoor.cataclysms.mixin;
 
+import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import com.probablyadoor.cataclysms.effect.ModEffects;
 import com.probablyadoor.cataclysms.entity.custom.MagicbaneSwordEntity;
 import com.probablyadoor.cataclysms.item.ModItems;
@@ -11,6 +12,8 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
@@ -78,6 +81,36 @@ public class AttackMixin {
                         magicbaneSwordEntity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0f, 1.5f, 0f);
                         world.spawnEntity(magicbaneSwordEntity);
                         magicbaneSwordEntity.setOwner(player);
+                    }
+                }
+            }
+            if (player.isHolding(ModItems.DAYBREAKER)) {
+                int daybreaker_charge = player.getMainHandStack().getOrDefault(ModDataComponentTypes.DAYBREAKER_CHARGE, 0);
+                if (daybreaker_charge <= 10) {
+                    player.getMainHandStack().set(ModDataComponentTypes.DAYBREAKER_CHARGE, daybreaker_charge + 1);
+                    if (!world.isClient) {
+                        world.playSound(
+                                null,
+                                player.getX(),
+                                player.getY(),
+                                player.getZ(),
+                                SoundEvents.BLOCK_RESPAWN_ANCHOR_CHARGE,
+                                SoundCategory.NEUTRAL,
+                                1F,
+                                1.5F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
+                    }
+                }
+                if (daybreaker_charge == 10) {
+                    if (!world.isClient) {
+                        world.playSound(
+                                null,
+                                player.getX(),
+                                player.getY(),
+                                player.getZ(),
+                                SoundEvents.ENTITY_WITHER_HURT,
+                                SoundCategory.NEUTRAL,
+                                5F,
+                                2F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
                     }
                 }
             }

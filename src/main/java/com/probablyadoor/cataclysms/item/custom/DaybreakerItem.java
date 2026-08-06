@@ -1,5 +1,6 @@
 package com.probablyadoor.cataclysms.item.custom;
 
+import com.probablyadoor.cataclysms.component.ModDataComponentTypes;
 import com.probablyadoor.cataclysms.sound.SoundRegistry;
 import mod.chloeprime.aaaparticles.api.common.AAALevel;
 import mod.chloeprime.aaaparticles.api.common.ParticleEmitterInfo;
@@ -52,11 +53,15 @@ public class DaybreakerItem extends SwordItem {
 
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
-        user.getItemCooldownManager().set(this, 75);
         ItemStack itemStack = user.getStackInHand(hand);
+        int daybreakerCharge = itemStack.getOrDefault(ModDataComponentTypes.DAYBREAKER_CHARGE, 0);
         int radius = 5;
         int kbstrength = 10;
-        if (!world.isClient && world instanceof ServerWorld serverWorld) {
+        if (daybreakerCharge < 10) {
+            return TypedActionResult.fail(itemStack);
+        }
+        if (!world.isClient && world instanceof ServerWorld serverWorld && daybreakerCharge >= 10) {
+            user.getItemCooldownManager().set(this, 75);
             AAALevel.addParticle(serverWorld, false, SUNLEAPSTART.clone().position(user.getX(), user.getY()+0.1, user.getZ()));
             world.playSound(
                     null,
@@ -65,7 +70,16 @@ public class DaybreakerItem extends SwordItem {
                     user.getZ(),
                     SoundEvents.ENTITY_BLAZE_SHOOT,
                     SoundCategory.NEUTRAL,
-                    0.5F,
+                    2F,
+                    1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
+            world.playSound(
+                    null,
+                    user.getX(),
+                    user.getY(),
+                    user.getZ(),
+                    SoundEvents.BLOCK_RESPAWN_ANCHOR_DEPLETE,
+                    SoundCategory.NEUTRAL,
+                    3F,
                     1.0F / (world.getRandom().nextFloat() * 0.8F + 1.6F));
             Box box = new Box(user.getX() + radius, user.getY() + radius, user.getZ() + radius,
                     user.getX() - radius, user.getY() - radius, user.getZ() - radius);
@@ -77,6 +91,7 @@ public class DaybreakerItem extends SwordItem {
                     }
                 }
             }
+            itemStack.set(ModDataComponentTypes.DAYBREAKER_CHARGE, 0);
         }
         return TypedActionResult.success(itemStack, world.isClient());
 
