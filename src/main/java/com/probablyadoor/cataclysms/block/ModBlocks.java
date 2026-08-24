@@ -1,6 +1,7 @@
 package com.probablyadoor.cataclysms.block;
 
 import com.probablyadoor.cataclysms.CataclysmStarscorched;
+import com.probablyadoor.cataclysms.block.custom.PedestalBlock;
 import com.probablyadoor.cataclysms.block.custom.StarSlateBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
@@ -30,6 +31,8 @@ public class ModBlocks {
             new StarSlateBlock(AbstractBlock.Settings.create().strength(10f)
                     .requiresTool().sounds(BlockSoundGroup.DEEPSLATE)));
 
+    public static final Block PEDESTAL = registerBlock("pedestal", new PedestalBlock(AbstractBlock.Settings.create().nonOpaque()));
+
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
         return Registry.register(Registries.BLOCK, Identifier.of(CataclysmStarscorched.MOD_ID, name), block);
@@ -45,6 +48,7 @@ public class ModBlocks {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.NATURAL).register(fabricItemGroupEntries -> {
                 fabricItemGroupEntries.add(ModBlocks.STARSCORCHED_SLATE);
+                fabricItemGroupEntries.add(ModBlocks.PEDESTAL);
         });
     }
 }
