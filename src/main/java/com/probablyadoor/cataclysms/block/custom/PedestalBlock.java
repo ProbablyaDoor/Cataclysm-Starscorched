@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class PedestalBlock extends BlockWithEntity implements BlockEntityProvider {
@@ -105,11 +106,48 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
     }
 
     private void processPedestals(World world, PedestalBlockEntity centerPedestal, ArrayList<PedestalBlockEntity> outerPedestals) {
-        for (PedestalBlockEntity outerPedestal: outerPedestals) {
+        if (!centerPedestal.getStack(0).isOf(Items.NETHER_STAR)) {
+            return;
+        }
+
+        HashMap<Item, Integer> counts = new HashMap<>();
+        for (PedestalBlockEntity outerPedestal : outerPedestals) {
             ItemStack itemStack = outerPedestal.getStack(0);
-            if (!itemStack.isOf(ModItems.MANGOSTEEN)) {
+            if (itemStack.isEmpty()) {
                 return;
             }
+            counts.merge(itemStack.getItem(), itemStack.getCount(), Integer::sum);
+        }
+
+        Item resultItem = null;
+
+        // Daybreaker: 2 starscorched ingots, 2 netherite ingots, 2 netherite swords, 2 lava buckets
+        if (counts.size() == 4
+                && counts.getOrDefault(ModItems.STARMETAL_INGOT, 0) == 2
+                && counts.getOrDefault(Items.NETHERITE_INGOT, 0) == 2
+                && counts.getOrDefault(Items.NETHERITE_SWORD, 0) == 2
+                && counts.getOrDefault(Items.LAVA_BUCKET, 0) == 2) {
+            resultItem = ModItems.DAYBREAKER;
+        }
+        // Frostfall: 2 bones, 2 netherite ingots, 2 blue ice, 2 starscorched ingots
+        else if (counts.size() == 4
+                && counts.getOrDefault(Items.BONE, 0) == 2
+                && counts.getOrDefault(Items.NETHERITE_INGOT, 0) == 2
+                && counts.getOrDefault(Items.BLUE_ICE, 0) == 2
+                && counts.getOrDefault(ModItems.STARMETAL_INGOT, 0) == 2) {
+            resultItem = ModItems.FROSTFALL;
+        }
+        // Magicbane: 2 starscorched ingots, 2 netherite ingots, 2 gold swords, 2 gold blocks
+        else if (counts.size() == 4
+                && counts.getOrDefault(ModItems.STARMETAL_INGOT, 0) == 2
+                && counts.getOrDefault(Items.NETHERITE_INGOT, 0) == 2
+                && counts.getOrDefault(Items.GOLDEN_SWORD, 0) == 2
+                && counts.getOrDefault(Items.GOLD_BLOCK, 0) == 2) {
+            resultItem = ModItems.MAGICBANE;
+        }
+
+        if (resultItem == null) {
+            return;
         }
 
         centerPedestal.clear();
@@ -122,7 +160,7 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
                 Block.NOTIFY_ALL
         );
 
-        for (PedestalBlockEntity outerPedestal: outerPedestals) {
+        for (PedestalBlockEntity outerPedestal : outerPedestals) {
             outerPedestal.clear();
             outerPedestal.markDirty();
 
@@ -142,21 +180,14 @@ public class PedestalBlock extends BlockWithEntity implements BlockEntityProvide
             world.spawnEntity(lightning);
         }
 
-        ArrayList<Item> possibleItems = new ArrayList<>();
-        possibleItems.add(ModItems.DAYBREAKER);
-        possibleItems.add(ModItems.FROSTFALL);
-        possibleItems.add(ModItems.MAGICBANE);
-        possibleItems.add(ModItems.NIGHTVEIL);
-        possibleItems.add(ModItems.CHAOS_TOOL);
-
-        ItemStack stack = new ItemStack(possibleItems.get(world.getRandom().nextInt(possibleItems.size())));
+        ItemStack stack = new ItemStack(resultItem);
 
         ItemEntity itemEntity = new ItemEntity(
-            world,
-            centerPos.getX(),
-            centerPos.getY() + 2,
-            centerPos.getZ(),
-            stack
+                world,
+                centerPos.getX(),
+                centerPos.getY() + 2,
+                centerPos.getZ(),
+                stack
         );
         world.spawnEntity(itemEntity);
 
