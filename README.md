@@ -11,6 +11,10 @@ blocks rather than just a single station.
 parody of those "custom weapon" or "custom gimmick" SMP servers.
 
 
+## VIDEOS!!!
+[Watch the video](https://drive.google.com/drive/folders/19Rhp9RBvsvV8CrL32GA6tq9ZZcoqp85u?usp=sharing)
+
+
 ## How this was made
 This project was made in the **Fabric modding engine using Java**
 with some help for animations from libraries such as [**Geckolib**](https://modrinth.com/mod/geckolib/versions)
