@@ -12,8 +12,8 @@ parody of those "custom weapon" or "custom gimmick" SMP servers.
 
 
 ## VIDEOS!!!
-[Watch the video](https://drive.google.com/drive/folders/19Rhp9RBvsvV8CrL32GA6tq9ZZcoqp85u?usp=sharing)
-
+https://youtu.be/6Y-4j0TggmM
+https://youtu.be/yMeduXxERbs
 
 ## How this was made
 This project was made in the **Fabric modding engine using Java**
